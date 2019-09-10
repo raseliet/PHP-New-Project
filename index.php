@@ -10,7 +10,7 @@
  * 
  */
 
-
+print 'Naujas komentaras';
 print 'Labas';
 //print 'Iki';
 
