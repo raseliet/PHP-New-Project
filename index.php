@@ -1,35 +1,28 @@
+
+
 <?php
 
-/**
- * komentaras
- * [
- * gtjj
- * 
- * 
- * 
- * 
- */
+date_default_timezone_set('Europe/Vilnius');
 
-print 'Naujas komentaras';
-print 'Labas';
-//print 'Iki';
+print date('Y-m-d', strtotime('+1 week'));
 
+    
 ?>
-
 
 
 
 <html>
     <head>
         <meta charset="UTF-8">
-        <title><?php print 'Aš ' . date('l') . ' ir PHP'; ?></title>
+        <title><?php print 'PHP lydės ir ' . date('Y-m-d', strtotime('+1 day')); ?></title>
     </head>
     <body>
         <h1>
-            Rasa - HTML <?php print 'ir PHP'; ?> asė jau nuo <?php print date('Y') . ' metų'; ?>
+            Rasa - PHP su manimi buvo ir  <?php print date('H', strtotime('-1 hour')) . 'ir valandą!'; ?>
         </h1>
         <p>
-            Viskas prasidėjo <?php print date('m') . ' mėnesio, ' . date('d') . ' dieną!'; ?> 
+           <?php print date('Y', strtotime('+ 1 year')); ?> ne už kalnų!
         </p>
+        <?php print date('l H:i:s') ;?>
     </body>
 </html>
