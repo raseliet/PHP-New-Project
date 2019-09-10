@@ -18,7 +18,7 @@ print date('Y-m-d', strtotime('+1 week'));
     </head>
     <body>
         <h1>
-            Rasa - PHP su manimi buvo ir  <?php print date('H', strtotime('-1 hour')) . 'ir valandą!'; ?>
+            Rasa - PHP su manimi buvo ir  <?php print date('H', strtotime('-1 hour')) . ' ' . 'valandą!'; ?>
         </h1>
         <p>
            <?php print date('Y', strtotime('+ 1 year')); ?> ne už kalnų!
