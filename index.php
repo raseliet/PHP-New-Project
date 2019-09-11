@@ -1,22 +1,30 @@
-<?php
-$color1 = rand(0, 255);
-$color2 = rand(0, 255);
-$color3 = rand(0, 255);
-$fontSize = rand(20, 30);
-?>
-
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>PHP lydės ir <?php print date('Y-m-d', strtotime('+' . rand(1,10) . 'year')); ?></title>
+        <title>Bomb img game, and date()</title>
+        <style>
+            .bomb-img {
+                background-image: url(http://pngimg.com/uploads/bomb/bomb_PNG16.png);
+                background-size: cover;
+                width: 1<?php print date('s') ;?>px;
+                height: 1<?php print date('s') ;?>px;
+            }
+            
+            .bomb-img-00 {
+                background-image: url(https://miro.medium.com/max/1005/1*XIajoiQj2tQfdNWZ7_PS5w.jpeg);
+                background-size: cover;
+                width: 100px;
+                height: 100px;
+            }
+        </style>
     </head>
-    <body style="background-color: rgb(<?php print $color1; ?>, <?php print $color2; ?>, <?php print $color3; ?>)">
-        <h1 style="font-size: <?php print $fontSize; ?>px">
-            Rasa - Galbūt turėsiu  <?php print (rand(1,5)); ?> vaikų(us)!
-        </h1>
-        <p style="color: rgb(<?php print $color3; ?>, <?php print $color2; ?>, <?php print $color1; ?>">
-            D. Trump'as nebebus prezidentu:<br>
-           <?php print date('Y-m-d', strtotime('+' . rand(2,10) . 'year')); ?> 
-        </p>
+    <body>
+        <div class="bomb-img  bomb-img-<?php print date('s') ;?> "></div>
+        <div><?php print date('s'); ?></div>
+        
     </body>
 </html>
+
+
+
+
