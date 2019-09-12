@@ -1,9 +1,44 @@
-<?php $laikas = date('s'); 
-$number_1 = 15;
-$number_2 = 97;
+<?php
+$laikas = date('s');
 
-$number_3 = $number_1 % $number_2;
-print $number_3;
-print $laikas . '<br/>';
-print $laikas % 2;
 
+$laikas_reversed = 59 - $laikas;
+
+
+
+
+
+?>
+<html>
+    <head> 
+        <meta charset="UTF - 8">
+        <title>Bomba su Css ir kintamaisiais</title>
+        <style>
+            .square {
+                height: 200px;
+                width: 200px;
+                background-color: #555;
+                text-align: center;
+            }
+            
+            .time0 {
+                background-color: red;
+            }
+                    
+          
+        </style>
+    </head>
+    <body>
+        <div class="square time<?php print $laikas_reversed; ?>">
+            <h1><?php print $laikas_reversed; ?></h1>
+            
+        </div>
+        
+    </body>
+</html> 
+
+      
+        
+   
+    
+    
