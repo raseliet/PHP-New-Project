@@ -6,7 +6,7 @@
 <li>$string = 'Tai yra tekstas'</li>
 <li>$int = 15</li>
 <li>$bool = true</li>
-<li>$null = nothing</li>
+<li>$null = null</li>
 </ul>
 
 </body>
