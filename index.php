@@ -1,13 +1,23 @@
+<?php
+​
+$img = 'http://qnimate.com/wp-content/uploads/2014/03/images2.jpg';
+​
+?>
 <html>
-<body>
-
-<h4>Sukurti po $variable kiekvienam tipui ir išspausdinti:</h4>
-<ul>
-<li>$string = 'Tai yra tekstas'</li>
-<li>$int = 15</li>
-<li>$bool = true</li>
-<li>$null = null</li>
-</ul>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <img src="<?php print $img; ?>">
+        <img src="<?php print $img; ?>">
+        <img src="<?php print $img; ?>">
+        <img src="<?php print $img; ?>">
+    </body>
 </html>
+
+
+
+
+
+
+
