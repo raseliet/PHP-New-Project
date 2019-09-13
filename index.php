@@ -1,49 +1,27 @@
 <?php
-$distance = rand(100, 200);
-$consumption = 7.5;
-$price_1 = 1.3;
-$my_money = 100;
+$grizai_velai = rand(0, 1);
+$grizai_isgeres = rand(0, 1);
 
-$fuel_total = $distance * $consumption / 100;
-$price_trip = $fuel_total * $price_1;
+if ($grizai_velai && !$grizai_isgeres) {
+   $pasekmes='Grizai velai';
+}else if($grizai_velai && $grizai_isgeres) {
+   $pasekmes='Grizai velai ir isgeres';
+}else if(!$grizai_velai && $grizai_isgeres){
+    $pasekmes='Grizai isgeres';
+}else{
+    $pasekmes='Nieko nepadarei';
+}
 
-$antraste = 'Kelionės skaičiuoklė';
-$kiek_nuvaziuota_km = 'Nuvažiuota distancija: ' . $distance . ' km.';
-$kiek_sunaudota_kuro = 'Sunaudota: ' . $fuel_total . ' l. kuro.';
-$keliones_sanaudos = 'Kaina: ' . $price_trip . ' eur.';
+$aplinkybes='Situacija: ' . $pasekmes;
 
-if ($price_trip <= $my_money) {
-    $iperkama = 'įperkama.';
-} else {
-    $iperkama = 'neįperkama.';
-};
-
-
-$title = 'Kelionės skaičiuoklė';
-$text = 'Suskaičiuoti ir išspausdinti:';
-$text_1 = 'Turimi pinigai:' . $my_money . ' eur.';
-$text_2 = 'Išvada: kelionė ' . $iperkama;
-
-
-if ($price_trip <= $my_money) {
-    $iperkama = 'įperkama.';
-} else {
-    $iperkama = 'neįperkama.';
-};
 ?>
+
 <html>
     <head>
-        <title><?php print $title; ?></title>  
+        <title>Buitinė skaičiuoklė</title>  
     </head>
     <body>
-        <h1><?php print $text; ?></h1>
-        <ul>
-            <li><?php print $kiek_nuvaziuota_km; ?></li>
-            <li><?php print $kiek_sunaudota_kuro; ?></li>
-            <li><?php print $keliones_sanaudos; ?></li>
-            <li><?php print $text_1; ?></li>
-        </ul>
-        <hr>
-        <p><?php print $text_2; ?></p>
+        <h1>Buitine skaiciuokle </h1>
+        <h2><?php print $aplinkybes; ?></h2>
     </body>
 </html>
