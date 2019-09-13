@@ -1,38 +1,43 @@
 <?php
-$sunny = rand(0, 1);
-$cloudy = rand(0, 1);
+$randomiser = rand(0, 1);
 
-
-if ($sunny) {
-    $koks_siandien_oras = 'Sauleta';
-    $class = 'sunny';
+if ($randomiser) {
+    $coffee = 'black-coffee';
 } else {
-    $koks_siandien_oras = 'Debesuota';
-    $class = 'cloudy';
+    $coffee = 'latte';
 }
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="includes/normalize.css">
         <style>
-            .sunny {
-                background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQREayfm8mV1QonfqBx8pFVuZ5_DygVUi13JzxQFTzs-tIUwRDv);
-                background-size: cover;
-                width: 100px;
-                height: 100px;
+            .div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
-            .cloudy {
-                background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr4luZFsUQeEZ5lIexKU8fINIQPP9LSymaWwGapeXvrrleqgJq);
-                background-size: cover;
-                width: 100px;
-                height: 100px;
-            }
+            .black-coffee {
+                height: 70vh;
+                color: white;
+                background-color: black;
 
-        </style>
-    </head>
-    <body>
-        <h1>Sauleta ar debesuota</h1>
-        <div class="<?php print $class; ?>"></div> 
-        <p><?php print $koks_siandien_oras; ?></p>
-    </body>
-</html>
+            }
+            .latte {
+                height: 70vh;
+                color: white;
+                background-color: burlywood;
+            }
+                p{
+                    font-size: 40px;
+
+                }
+
+            </style>
+        </head>
+        <body>
+            <h1>Kokia kava gersiu</h1>
+            <div class="<?php print $coffee; ?>"></div> 
+            <p>Gersiu <?php print $coffee; ?></p>
+        </body>
+    </html>
