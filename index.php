@@ -1,18 +1,22 @@
 <?php
-$randomiser = rand(0, 1);
+$randomiser = rand(0, 2);
 
-if ($randomiser) {
+if ($randomiser === 0) {
     $coffee = 'black-coffee';
-} else {
+} elseif ($randomiser === 1) {
     $coffee = 'latte';
-}
+} else {
+    $coffee = 'tea';
+} 
+    
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
+        <title>Ka gersi - trys opcijos</title>
         <link rel="stylesheet" href="includes/normalize.css">
         <style>
-            .div {
+            div {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -28,16 +32,22 @@ if ($randomiser) {
                 color: white;
                 background-color: burlywood;
             }
-                p{
-                    font-size: 40px;
+            .tea {
+                height: 70vh;
+                color: white;
+                background-color: activecaption;
 
-                }
+            }
+            p{
+                font-size: 40px;
 
-            </style>
-        </head>
-        <body>
-            <h1>Kokia kava gersiu</h1>
-            <div class="<?php print $coffee; ?>"></div> 
-            <p>Gersiu <?php print $coffee; ?></p>
-        </body>
-    </html>
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>Ka gersiu?</h1>
+        <div class="<?php print $coffee; ?>"></div> 
+        <p>Gersiu <?php print $coffee; ?></p>
+    </body>
+</html>
