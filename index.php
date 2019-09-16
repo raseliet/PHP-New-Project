@@ -2,16 +2,18 @@
 $sunny = rand(0, 1);
 $cloudy = rand(0, 1);
 $rainy = rand(0, 1);
-if ($sunny) {
+if ($sunny && !$cloudy) {
     $koks_siandien_oras = 'Saulėta';
     $class = 'sunny';
-} elseif ($cloudy) {
+} elseif ($cloudy && $sunny) {
     $koks_siandien_oras = 'Debesuota';
     $class = 'cloudy';
+} elseif ($rainy && !$sunny) {
+    $koks_siandien_oras = 'Lyja';
+    $class = 'rainy';
 } else {
     $koks_siandien_oras = 'Lyja';
     $class = 'rainy';
-
 }
 ?>
 <html>
@@ -36,7 +38,14 @@ if ($sunny) {
                 width: 140px;
                 height: 120px;
             }
-            
+            .cloudy {
+                background-image: url(https://cdn3.iconfinder.com/data/icons/sunnyday-2/142/light_cloudy_heavy_rain-512.png);
+                background-size: cover;
+                width: 100px;
+                height: 100px;
+            }
+
+
         </style>
     </head>
     <body>
