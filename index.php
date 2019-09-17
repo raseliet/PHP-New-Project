@@ -1,27 +1,37 @@
 <?php
-$months = 12;
-$wallet = 1000;
-$month_income = 700;
+$days = 365;
+$pack_price = 3.50;
+$count_ttl = 0;
 
-for ($i = 1; $i <= 12; $i++) {
-    $month_expenses = rand(600, 1200);
-    $wallet += $month_income - $month_expenses;
-
-    if ($wallet < 0) {
-        $h2_text = "Atsargiai, $months mėnesį gali baigtis pinigai: $wallet";
-        break;
+for ($i = 0; $i < $days; $i++) {
+    $savaites_diena = date('N', strtotime("+$i days"));
+    //print "$savaites_diena<br/>";
+    if ($savaites_diena <= 5) {
+        $cigs_mon_fri = rand(3, 4);
+        $count_ttl += $cigs_mon_fri;
+        //print "$savaites_diena-ieni surukiau $cigs_mon_fri<br/>";
+    } elseif ($savaites_diena == 6) {
+        $cigs_sat = rand(10, 20);
+        $count_ttl += $cigs_sat;
+        //print "$savaites_diena-ieni surukiau $cigs_mon_fri<br/>";
+    } else {
+        $cigs_sun = rand(1, 3);
+        $count_ttl += $cigs_sun;
+        //print "$savaites_diena-ieni surukiau $cigs_mon_fri<br/>";
     }
-
-    $h2_text = "Po $months m., prognozuojamas likutis: $wallet";
 }
+//print "$count_ttl <br/>";
+$price_ttl = $pack_price / 20 * $count_ttl;
 
+$h2_text = "Per $days dienas surūkysiu $count_ttl cigaretes už $price_ttl eur.";
 ?>
+
 <html>
     <head>
         <meta charset="utf-8">
     </head>
     <body>
-        <h1>Wallet Forecast</h1>
+        <h1>Mano dūmų skaičiuoklė</h1>
         <h2><?php print $h2_text; ?></h2>
     </body>
 </html>
