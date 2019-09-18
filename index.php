@@ -1,23 +1,14 @@
 <?php
 
-$fruits_array = ['obuolys', 'apelsinas', 'cukinija'];
-var_dump($fruits_array);
-
-$maisto_prekes_array = [
-    [
-        'pavadinimas' => 'Kiaušinis',
-        'kiekis' => 2,
-        'dydis' => 'didelis',
+$zaideju_array = [
+    'Petras_Pizdys' => [
+        'irankis_1' => 'Pamestas telefonas',
     ],
-    [
-        'pavadinimas' => 'Baklažanas',
-        'kiekis' => 1,
-        'dydis' => 'mažas',
+    'Tomas Ablomas' => [
+        'irankis_1' => 'Naudojamas buljonas',
     ],
-    [
-        'pavadinimas' => 'Grietinė',
-        'kiekis' => 1,
-        'dydis' => 'didelis',
+    'Ana Shitkova' => [
+        'irankis_1' => 'Pasibaigęs rulonas',
     ],
 ];
 
