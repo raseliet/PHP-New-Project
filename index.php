@@ -12,4 +12,4 @@ $zaideju_array = [
     ],
 ];
 
-var_dump($maisto_prekes_array);
+var_dump($zaideju_array);
