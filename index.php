@@ -1,21 +1,60 @@
 <?php
 
-$zaideju_array = [
-    'zaidejas_1' => [
-        'vardas' => 'Petras_Pizdys',
-        'irankis_1' => 'Telefonas',
-        'irankis_1_savybe' => 'Pamestas',
+$pirma_lentyna = [
+    [
+        'pieno_produktai' => [
+            'pavadinimas' => 'pienas',
+            'kiekis' => 1,
+            'pozicija_lentynoje' => 'pirmas',
+        ],
+        [
+            'pavadinimas' => 'kefyras',
+            'kiekis' => 0,
+            'pozicija_lentynoje' => 'antras',
+        ],
     ],
-    'zaidejas_2' => [
-        'vardas' => 'Tomas Ablomas',
-        'irankis_1' => 'Buljonas',
-        'irankis_1_savybe' => 'Naudojamas',
+    [
+        'padazai' => [
+            'pavadinimas' => 'ketčupas',
+            'kiekis' => 1,
+            'pozicija_lentynoje' => 'ketvirtas',
+        ],
     ],
-    'zaidejas_3' => [
-        'vardas' => 'Ana Shitkova',
-        'irankis_1' => 'Rulonas',
-        'irankis_1_savybe' => 'Pasibaigęs',
+    [
+        'alkoholiniai_gerimai' => [
+            'pavadinimas' => 'degtinė',
+            'kiekis' => 2,
+            'pozicija_lentynoje' => 'trečias',
+        ],
+    ],
+];
+$antra_lentyna = [
+    [
+        'pieno_produktai' => [
+            'pavadinimas' => 'grietinė',
+            'kiekis' => 1,
+            'pozicija_lentynoje' => 'antras',
+        ],
+        [
+            'pavadinimas' => 'jogurtas',
+            'kiekis' => 2,
+            'pozicija_lentynoje' => 'trečias',
+        ],
+    ],
+    [
+        'zuvies_produktai' => [
+            'pavadinimas' => 'žuvis',
+            'kiekis' => 0,
+            'pozicija_lentynoje' => 'ketvirtas',
+        ],
+    ],
+    [
+        'kiti_produktai' => [
+            'pavadinimas' => 'kiaušiniai',
+            'kiekis' => 3,
+            'pozicija_lentynoje' => 'pirmas',
+        ],
     ],
 ];
 
-var_dump($zaideju_array);
+var_dump($pirma_lentyna, $antra_lentyna);
