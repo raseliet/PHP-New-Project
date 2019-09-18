@@ -9,7 +9,7 @@ $mano_atmintis = [
 $rand_flashback_idx = rand(0, count($mano_atmintis) - 1);
 
 $h2_text = "$vardas atmintis";
-$h3_text = $mano_atmintis[$rand_flashback_idx];
+$h3_text = "Flashback #4: $mano_atmintis[$rand_flashback_idx]";
 
 ?>
 
