@@ -6,8 +6,10 @@ $mano_atmintis = [
     'Viskis', 'Alus', 'Degtine', 'Paskaita'
 ];
 
-$h2_text = "$vardas atmintis";
 $rand_flashback_idx = rand(0, count($mano_atmintis) - 1);
+
+$h2_text = "$vardas atmintis";
+$h3_text = $mano_atmintis[$rand_flashback_idx];
 
 ?>
 
@@ -23,6 +25,6 @@ $rand_flashback_idx = rand(0, count($mano_atmintis) - 1);
                 <li><?php print $prisiminimas; ?></li>
 <?php endforeach; ?>
         </ul>
-        <h3><?php print $mano_atmintis[$rand_flashback_idx]; ?></h3>
+        <h3><?php print $h3_text; ?></h3>
     </body>
 </html>
