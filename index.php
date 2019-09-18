@@ -1,14 +1,20 @@
 <?php
 
 $zaideju_array = [
-    'Petras_Pizdys' => [
-        'irankis_1' => 'Pamestas telefonas',
+    'zaidejas_1' => [
+        'vardas' => 'Petras_Pizdys',
+        'irankis_1' => 'Telefonas',
+        'irankis_1_savybe' => 'Pamestas',
     ],
-    'Tomas Ablomas' => [
-        'irankis_1' => 'Naudojamas buljonas',
+    'zaidejas_2' => [
+        'vardas' => 'Tomas Ablomas',
+        'irankis_1' => 'Buljonas',
+        'irankis_1_savybe' => 'Naudojamas',
     ],
-    'Ana Shitkova' => [
-        'irankis_1' => 'Pasibaigęs rulonas',
+    'zaidejas_3' => [
+        'vardas' => 'Ana Shitkova',
+        'irankis_1' => 'Rulonas',
+        'irankis_1_savybe' => 'Pasibaigęs',
     ],
 ];
 
