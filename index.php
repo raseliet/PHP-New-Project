@@ -1,60 +1,25 @@
 <?php
 
-$pirma_lentyna = [
-    [
-        'pieno_produktai' => [
-            'pavadinimas' => 'pienas',
-            'kiekis' => 1,
-            'pozicija_lentynoje' => 'pirmas',
-        ],
-        [
-            'pavadinimas' => 'kefyras',
-            'kiekis' => 0,
-            'pozicija_lentynoje' => 'antras',
-        ],
-    ],
-    [
-        'padazai' => [
-            'pavadinimas' => 'ketčupas',
-            'kiekis' => 1,
-            'pozicija_lentynoje' => 'ketvirtas',
-        ],
-    ],
-    [
-        'alkoholiniai_gerimai' => [
-            'pavadinimas' => 'degtinė',
-            'kiekis' => 2,
-            'pozicija_lentynoje' => 'trečias',
-        ],
-    ],
-];
-$antra_lentyna = [
-    [
-        'pieno_produktai' => [
-            'pavadinimas' => 'grietinė',
-            'kiekis' => 1,
-            'pozicija_lentynoje' => 'antras',
-        ],
-        [
-            'pavadinimas' => 'jogurtas',
-            'kiekis' => 2,
-            'pozicija_lentynoje' => 'trečias',
-        ],
-    ],
-    [
-        'zuvies_produktai' => [
-            'pavadinimas' => 'žuvis',
-            'kiekis' => 0,
-            'pozicija_lentynoje' => 'ketvirtas',
-        ],
-    ],
-    [
-        'kiti_produktai' => [
-            'pavadinimas' => 'kiaušiniai',
-            'kiekis' => 3,
-            'pozicija_lentynoje' => 'pirmas',
-        ],
-    ],
+$vardas = 'Rasos';
+$mano_atmintis = [
+    'Penktadienis', 'Paskaita', 'Baras',
+    'Viskis', 'Alus', 'Degtine', 'Paskaita'
 ];
 
-var_dump($pirma_lentyna, $antra_lentyna);
+$h2_text = "$vardas atmintis";
+?>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Kas buvo penktadienį?</h1>
+        <h2><?php print $h2_text; ?></h2>
+        <ul>
+            <?php foreach ($mano_atmintis as $prisiminimas): ?>
+                <li><?php print $prisiminimas; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </body>
+</html>
