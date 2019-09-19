@@ -1,18 +1,14 @@
 <?php
-
+ 
 $array = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday'
+'Monday' =>'Monday',
+ 'Tuesday' => 'Tuesday',
+ 'Wednesday' => 'Wednesday',
+ 'Thursday' => 'Thursday',
+ 'Friday' => 'Friday',
+ 'Saturday' => 'Saturday',
+ 'Sunday' => 'Sunday'
 ];
-
-$array[4] = 'Blackout';
-
-unset($array[4]);
 
 $array[0] = 'darbo diena';
 $array[1] = 'darbo diena';
