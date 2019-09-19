@@ -1,21 +1,30 @@
 <?php
-$draugo_vardas = 'Draugo';
 $draugo_atmintis = [
     'Penktadienis', 'Paskaita', 'Kinas',
     'Vynas', 'Alus', 'Knygos', 'Paskaita'
 ];
 
-$mano_vardas = 'Rasos';
 $mano_atmintis = [
     'Penktadienis', 'Paskaita', 'Baras',
     'Viskis', 'Alus', 'Degtine', 'Paskaita'
 ];
 
-
+$mprisiminimas = [];
+$dprisiminimas = [];
 $bendra_atmintis = [];
 
-$h2_text = "$draugo_vardas atmintis: ";
-$h3_text = "$mano_vardas atmintis: ";
+foreach ($draugo_atmintis as $dprisiminimas) {
+    foreach ($mano_atmintis as $mprisiminimas) {
+        if ($dprisiminimas == $mprisiminimas) {           
+            $bendra_atmintis[] = $mprisiminimas;
+            break;
+        }
+    }
+}
+
+var_dump($bendra_atmintis);
+
+
 $h4_text = "Sutapę prisiminimai";
 ?>
 
@@ -25,20 +34,12 @@ $h4_text = "Sutapę prisiminimai";
     </head>
     <body>
         <h1>Kas buvo penktadienį?</h1>
-        <h2><?php print $h2_text; ?></h2>
+        <h3><?php print $h4_text; ?></h3>
         <ul>
-            <?php foreach ($mano_atmintis as $mprisiminimas): ?>
-                <li><?php print $mprisiminimas; ?></li>
+            <?php
+            ?>
 
-            <?php endforeach; ?>
         </ul>
-        <h2><?php print $h3_text; ?></h2>
-        <ul>
-            <?php foreach ($draugo_atmintis as $dprisiminimas): ?>
-                <li><?php print $dprisiminimas; ?></li>
-            <?php endforeach; ?>
-        </ul>
-
 
     </body>
 </html>
