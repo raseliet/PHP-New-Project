@@ -1,45 +1,33 @@
 <?php
-$draugo_atmintis = [
-    'Penktadienis', 'Paskaita', 'Kinas',
-    'Vynas', 'Alus', 'Knygos', 'Paskaita'
+
+$bank_report = [
+    [
+        'name' => 'IKI darbo užmokestis',
+        'amount' => 600,
+    ],
+    [
+        'name' => 'Kalvarijų Načnykas',
+        'amount' => -15,
+    ],
+    [
+        'name' => 'Pinigų išgryninimas Naugarduko g.',
+        'amount' => -10000,
+    ],
+    [
+        'name' => 'Pinigų išgryninimo mokestis',
+        'amount' => -100000000,
+    ],
 ];
 
-$mano_atmintis = [
-    'Penktadienis', 'Paskaita', 'Baras',
-    'Viskis', 'Alus', 'Degtine', 'Paskaita'
-];
+foreach ($bank_report as $key => $value) {
 
-$mprisiminimas = [];
-$dprisiminimas = [];
-$bendra_atmintis = [];
-
-foreach ($draugo_atmintis as $dprisiminimas) {
-    foreach ($mano_atmintis as $mprisiminimas) {
-        if ($dprisiminimas == $mprisiminimas) {           
-            $bendra_atmintis[] = $mprisiminimas;
-            break;
-        }
+    if ($value['amount'] > 0) {
+        $bank_report[$key]['css_class'] = 'expense';
+    } else {
+        $bank_report[$key]['css_class'] = 'income';
+      
     }
 }
-
-var_dump($bendra_atmintis);
-
-
-$h4_text = "Sutapę prisiminimai";
+var_dump($bank_report);
+print $bank_report[0]['amount'] < 0;
 ?>
-
-<html>
-    <head>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <h1>Kas buvo penktadienį?</h1>
-        <h3><?php print $h4_text; ?></h3>
-        <ul>
-            <?php
-            ?>
-
-        </ul>
-
-    </body>
-</html>
