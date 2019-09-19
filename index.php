@@ -28,4 +28,8 @@ foreach ($array as $key => $day) {
     }
 }
 
+foreach ($array as $key => $day){
+    unset ($array[$key]);
+}
+
 var_dump($array);
