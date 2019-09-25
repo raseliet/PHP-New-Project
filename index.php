@@ -1,156 +1,48 @@
 <?php
+$style_randomiser = rand(0, 1);
+$story_randomiser = rand(0, 1);
 
-$thermometer = [
-    ['class' => 'bg-green', 'text' => 'PX'],
-    ['class' => 'bg-yellow', 'text' => 'BL'],
-    ['class' => 'bg-orange', 'text' => 'NX'],
-    ['class' => 'bg-red', 'text' => 'PZ2A'],    
-];
+$short_story = '';
+$short_story_1 = 'Pakalikas manyje: Viena diena kaip zaibas is giedro dangaus trenkia zinia, kad Gru turi niekad nematyta broli dvyni '
+        . 'Dru! Broliu susitikimas is pradziu pradziugina Gru, taciau veliau privercia sunerimti – nes Dru lyg apsestas skatina broleli '
+        . 'prisijungti prie dar vieno darbelio. Nors piktadariska Gru prigimtis likusi praeityje, taciau kazkas ji traukia atgal prie nusikalteliskumo. '
+        . '. Vejamas nuotykiu troskimo, Gru leidziasi brolio ikalbamas ir broliai – su pakaliku pagalba, zinoma – ima planuoti amziaus nusikaltima.';
+$short_story_2 = 'Blogieji Pakalikai yra purpurines spalvos, kadangi spalvu paleteje tai – priesinga geltonai spalva.
+Pakalikų kalba – ispanu, anglu, prancuzu, italu, rusu ir korejieciu kalbu misinys.';
 
-$stories = [
-    [
-        'class' => 'text-green',
-        'stories' => [
-            'Atsikėliau', 
-            'Prabudau', 
-            'Išlipau iš lovos'
-        ],
-    ],
-    [
-        'class' => 'text-yellow',
-        'stories' => [
-            'Vėl pirmadienis', 
-            'Apšalę mašinos langai', 
-            'Nėra ką valgyt pusryčiams'
-        ],
-    ],
-    [
-        'class' => 'text-orange',
-        'stories' => [
-            'Pavėlavau į darbo meetą', 
-            'Pamiršau cigaretes',
-            'Balandis apšiko švarką'
-        ],
-    ],   
-    [
-        'class' => 'text-red',
-        'stories' => [
-            'Užtvindžiau kaimynus', 
-            'Mane užtvindė kaimynai', 
-            'Sumaišiau panaudotą katės kraiką su šokoladu'
-        ],
-    ],
-];
-
-$target_state = rand(1, 4);
-
-foreach ($thermometer as $state_idx => $state) {
-    if ($state_idx < $target_state) {
-        // Set Story
-        $story_idx = array_rand($stories[$state_idx]['stories']);        
-        $stories[$state_idx]['chosen_story'] = $stories[$state_idx]['stories'][$story_idx];
-    } else {
-        $thermometer[$state_idx]['class'] = 'white';
-        unset($stories[$state_idx]);
-    }
-
-    if ($state_idx !== $target_state) {
-        $thermometer[$state_idx]['name'] = '';
-    }
+if ($story_randomiser === 0) {
+    $short_story = $short_story_1;
+} else {
+    $short_story = $short_story_2;
 }
-
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Thermometer</title>
-        <style>
-            body {
-                background: black;
-            }
+<html>
+    <style>
+        .bg{
+            width:100%;
+            height:100%;
+
+        }
+        .bg-0 {
+            background-image:url("https://i.pinimg.com/originals/70/ba/bf/70babf7ff50c7d8a91a594f4f4278417.jpg");
+            color: black;
+        }
+
+        .bg-1 {
+            background-image: url("https://hdwallpaperim.com/wp-content/uploads/2017/08/24/102028-minions-minimalism-black-Pulp_Fiction-bananas-Pulp_Fiction_parody-parody-mix_up-748x468.jpg");
+            color: white;
+
             
-            .container {
-                display: flex;
-                align-items: center;
-            }
+        }
 
-            .thermo-circle, .thermo-box {                
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: bold; 
-                color: white;  
-                margin-left: 10px;                
-            }
-            
-            .thermo-circle {
-                width: 100px;
-                height: 100px;
-                background-color: green;
-                border-radius: 100%;            
-            }
+    </style>
+    <body class="bg bg-<?php print $style_randomiser; ?>">
 
-            .thermo-box {
-                width: 100px;
-                height: 50px;
-                border: 2px solid grey;                            
-            }
+        <h1>Mes esame MINIONAI!</h1>
+        <h2>Why we made PZ2AMAT?</h2>
+        <p><?php print $short_story; ?></p>
 
-
-            .bg-green {
-                background-color: green;
-            }
-
-            .bg-yellow {
-                background-color: #f3f309;
-            }
-
-            .bg-red {
-                background-color: red;
-            }
-
-            .bg-orange {
-                background-color: orange;
-            }
-
-            .bg-white {
-                background-color: white;
-            }
-            
-            .text-green {
-                color: green;
-            }
-            
-            .text-yellow {
-                color: yellow;
-            }
-            
-            .text-orange {
-                color:  orange;
-            }
-            
-            .text-red {
-                color: red;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="thermo-circle">0</div>
-            
-            <?php foreach ($thermometer as $state_idx => $state) : ?>
-                <div class="thermo-box <?php print $state['class']; ?>">
-                    <?php print $state['text']; ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
-        <ul>
-            <?php foreach ($stories as $story): ?>
-                <li class="<?php print $story['class']; ?>">
-                    <?php print $story['chosen_story']; ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
     </body>
 </html>
