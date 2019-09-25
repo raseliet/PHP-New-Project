@@ -1,19 +1,31 @@
 <?php
 
-$x = 4;
-$y = 5;
+$n = rand(11, 12);
 
-function sum($x, $y) {
-    return $x + $y;
+function is_prime($n) {
+    for ($x = 2; $x < $n; $x++) {
+        if ($n % $x == 0) {
+            return false;
+        }      
+    }
+    
+    return true;
 }
+ 
+$text = "$n " . (is_prime($n) ? 'yra' : 'nėra') . ' pirminis skaičius';
 
-$suma = "$x ir $y suma: " . sum($x, $y);
+if (is_prime($n)) {
+    $text = "$n yra pirminis skaičius";
+} else {
+    $text = "$n nėra pirminis skaičius";
+}
 
 ?>
 <html>
+    <head>
+        <title>function</title>
+    </head>
     <body>
-        <h1>
-            <?php print $suma; ?>
-        </h1>
+        <h1><?php print $text; ?></h1>
     </body>
-</html> 
+</html>
