@@ -1,35 +1,19 @@
 <?php
 
-$array = [
-    'Monday' => 'workday',
-    'Tuesday' => 'workday',
-    'Wednesday' => 'workday',
-    'Thursday' => 'workday',
-    'Friday' => 'workday',
-    'Saturday' => 'Saturday',
-    'Sunday' => 'Sunday'
-];
+$x = 4;
+$y = 5;
 
-$tasks = [
-    'Keliamės 6:00',
-    'Sporto klubas',
-    'Rytinis kamštis',
-    'Code Academy',
-    'Vakarinis kamštis',
-    'Netflix'
-];
-
-foreach ($array as $key => $day) {
-    if ($day == 'workday') {
-        $array[$key] = $tasks;
-        if ($key == 'Friday') {
-            $array[$key][5] = 'Baro linksmybes';
-        }
-    }
+function sum($x, $y) {
+    return $x + $y;
 }
 
-foreach ($array as $key => $day){
-    unset ($array[$key]);
-}
+$suma = "$x ir $y suma: " . sum($x, $y);
 
-var_dump($array);
+?>
+<html>
+    <body>
+        <h1>
+            <?php print $suma; ?>
+        </h1>
+    </body>
+</html> 
