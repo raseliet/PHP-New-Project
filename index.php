@@ -1,48 +1,73 @@
 <?php
-$style_randomiser = rand(0, 1);
-$story_randomiser = rand(0, 1);
 
-$short_story = '';
-$short_story_1 = 'Pakalikas manyje: Viena diena kaip zaibas is giedro dangaus trenkia zinia, kad Gru turi niekad nematyta broli dvyni '
-        . 'Dru! Broliu susitikimas is pradziu pradziugina Gru, taciau veliau privercia sunerimti – nes Dru lyg apsestas skatina broleli '
-        . 'prisijungti prie dar vieno darbelio. Nors piktadariska Gru prigimtis likusi praeityje, taciau kazkas ji traukia atgal prie nusikalteliskumo. '
-        . '. Vejamas nuotykiu troskimo, Gru leidziasi brolio ikalbamas ir broliai – su pakaliku pagalba, zinoma – ima planuoti amziaus nusikaltima.';
-$short_story_2 = 'Blogieji Pakalikai yra purpurines spalvos, kadangi spalvu paleteje tai – priesinga geltonai spalva.
-Pakalikų kalba – ispanu, anglu, prancuzu, italu, rusu ir korejieciu kalbu misinys.';
+function slot_run($size) {
+    $array = [];
 
-if ($story_randomiser === 0) {
-    $short_story = $short_story_1;
-} else {
-    $short_story = $short_story_2;
+    for ($x = 0; $x < $size; $x++) {
+        for ($y = 0; $y < $size; $y++) {
+            $array[$x][$y] = rand(0, 1);
+        }
+    }
+
+    return $array;
 }
+
+$matrix = slot_run(3);
+
+$matrix_display = [];
+foreach ($matrix as $row_idx => $row) {
+    $matrix_display[$row_idx] = [
+        'class' => 'winning',
+        'columns' => []
+    ];
+    foreach ($row as $column) {
+        if ($column == 0) {
+            $matrix_display[$row_idx]['columns'][] = [
+                'class' => 'bg-blue',
+            ];
+        } else {
+            $matrix_display[$row_idx]['columns'][] = [
+                'class' => 'bg-yellow',
+            ];
+        }
+    }
+}
+
 ?>
-
-<!DOCTYPE html>
 <html>
-    <style>
-        .bg{
-            width:100%;
-            height:100%;
+    <head>
+        <title>Las vegas </title>
+        <style>
+            .row.winning {
+                border: 1px solid red;
+            }
 
-        }
-        .bg-0 {
-            background-image:url("https://i.pinimg.com/originals/70/ba/bf/70babf7ff50c7d8a91a594f4f4278417.jpg");
-            color: black;
-        }
+            .column {
+                display: inline-block;
+                width: 50px;
+                height: 50px;
+                border: 1px solid black;
+            }
 
-        .bg-1 {
-            background-image: url("https://hdwallpaperim.com/wp-content/uploads/2017/08/24/102028-minions-minimalism-black-Pulp_Fiction-bananas-Pulp_Fiction_parody-parody-mix_up-748x468.jpg");
-            color: white;
+            .bg-blue {
+                background-color: blue;
+            }
 
-            
-        }
+            .bg-yellow {
+                background-color: yellow;
+            }
 
-    </style>
-    <body class="bg bg-<?php print $style_randomiser; ?>">
-
-        <h1>Mes esame MINIONAI!</h1>
-        <h2>Why we made PZ2AMAT?</h2>
-        <p><?php print $short_story; ?></p>
-
+        </style>
+    </head> 
+    <body>
+        <div class="slot-container">
+            <?php foreach ($matrix_display as $row): ?>
+                <div class="row <?php print $row['class']; ?>">
+                    <?php foreach ($row['columns'] as $column): ?>
+                        <div class="column <?php print $column['class']; ?>"></div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </body>
 </html>
