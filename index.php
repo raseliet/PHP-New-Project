@@ -8,6 +8,14 @@ for ($i = 0; $i < 5; $i++) {
 
 var_dump($sheep);
 
+foreach ($sheep as $key => $value) {
+    unset($sheep[$key]);
+    $sheep[$key] = $value;
+}
+$sheep[3] = 'velniop sistema';
+
+var_dump($sheep);
+//
 //D:\Private\Doc\Desktop\www\index.php:12:
 //array (size=6)
 //  0 => string 'blee' (length=4)
