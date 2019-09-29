@@ -1,26 +1,20 @@
 <?php
-
-$sheep = ['blee'];
-
-for ($i = 0; $i < 5; $i++) {
-    $sheep[] = &$sheep[$i];
-}
-
-var_dump($sheep);
-
-foreach ($sheep as $key => $value) {
-    unset($sheep[$key]);
-    $sheep[$key] = $value;
-}
-$sheep[3] = 'velniop sistema';
-
-var_dump($sheep);
+//Turime masyvą:$array = ['w','t','r','r','t'];
+//Parašyti f-iją
+//change_values($array, $val_from, $val_to)
+//kuri visus elementus lygius
+//$val_from pakeistų į $val_to
 //
-//D:\Private\Doc\Desktop\www\index.php:12:
-//array (size=6)
-//  0 => string 'blee' (length=4)
-//  1 => string 'blee' (length=4)
-//  2 => string 'blee' (length=4)
-//  3 => string 'blee' (length=4)
-//  4 => string 'blee' (length=4)
-//  5 => string 'blee' (length=4)
+//F-ija turi veikti reference‘ų pagalba, be return‘o.
+$array = ['w', 't', 'r', 'r', 't'];
+function change_values(&$array, $val_from, $val_to) {
+   foreach ($array as &$raide) {
+       if ($raide === $val_from) {
+           $raide = $val_to;
+       }
+   }
+}
+$backup = $array;
+change_values($array, 't', 'T');
+var_dump($array);
+var_dump($backup);
