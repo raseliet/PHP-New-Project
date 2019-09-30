@@ -1,36 +1,67 @@
 <?php
 
 var_dump($_POST);
-$value = 0;
+
+$anketa = [];
 
 
-if (isset($_POST['enter'])) {
-    $value = $_POST['enter'] + 1;
+
+if (isset($_POST['submit'])) {
+    $anketa['name'] = 'Vardas: ' . $_POST['name'];
+    $anketa['surname'] = 'Pavardė: ' . $_POST['surname'];
+    $anketa['age'] = 'Amžius: ' . $_POST['age'] . 'm.';
+    $anketa['lygis'] = 'Lygis: ' . $_POST['lygis'];
+    $anketa['text'] = $_POST['name'] . ', kuriam yra ' . $_POST['age'] . ' metai, atsidūrė anketoje ir jis yra ' . lcfirst($_POST['lygis']);
 }
 ?>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Formos</title>
+        <meta charset="UTF-8">
+        <title>Sukurti anketą</title>
         <style>
             img {
-                width: 50px;
+                width: 200px;
             }
         </style>
-        <meta charset="UTF-8">
-
     </head>
     <body>
+        <h2>Pažymėjimas</h2>
+        <br>
+        <img src="http://www.radicalcompliance.com/wp-content/uploads/2018/06/certifications.jpg" alt="">
+        <br>
         <form method="post">
+            <label>
+                <span>Vardas:</span> 
+                <input type="text" placeholder="Vardas" name="name" required>
+            </label>
 
-            <input type="submit" name="enter" value="<?php print $value; ?>">
 
+            <label>
+                <span>Pavardė:</span> 
+                <input type="text" placeholder="Pavardė" name="surname" required>
+            </label>
+
+            <label>
+                <span>Amžius:</span> 
+                <input type="number" placeholder="23" name="age">
+            </label>
+
+            <label>
+                <span>Kaip vertini savo PHP žinias?</span> 
+                <select id="lygis" name="lygis">
+                    <option value="pradedantysis" selected>Pradedantysis</option>
+                    <option value="pažengęs">Pažengęs</option>
+                    <option value="profesionalas">Profesionalas</option>
+
+                </select>
+
+                <input type="submit" placeholder="Pateikti" name="submit" value="Patvirtinti">
+            </label>
         </form> 
-
-        <?php for ($i = 0; $i < $value; $i++): ?>
-
-            <img src="https://images-na.ssl-images-amazon.com/images/I/51Ps3zmCS4L._SX322_BO1,204,203,200_.jpg" alt="">
-        <?php endfor; ?>
+        <?php foreach ($anketa as $input): ?> 
+            <p><?php print $input; ?></p>
+        <?php endforeach; ?>
     </body>
 </html>
