@@ -1,20 +1,29 @@
 <?php
-//Turime masyvą:$array = ['w','t','r','r','t'];
-//Parašyti f-iją
-//change_values($array, $val_from, $val_to)
-//kuri visus elementus lygius
-//$val_from pakeistų į $val_to
-//
-//F-ija turi veikti reference‘ų pagalba, be return‘o.
-$array = ['w', 't', 'r', 'r', 't'];
-function change_values(&$array, $val_from, $val_to) {
-   foreach ($array as &$raide) {
-       if ($raide === $val_from) {
-           $raide = $val_to;
-       }
-   }
+var_dump($_POST);
+$answer = 0;
+
+function square($x) {
+    return $x ** 2;
 }
-$backup = $array;
-change_values($array, 't', 'T');
-var_dump($array);
-var_dump($backup);
+
+if (isset($_POST['enter'])) {
+    $answer = square($_POST['skaicius']);
+}
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Formos</title>
+    </head>
+    <body>
+        <form method="post">
+            <span>Ką pakelti kvadratu?</span>
+            <input type="number" name="skaicius" required>
+            <input type="submit" name="enter">
+            <br>
+            <label>Atsakymas: <?php print $answer; ?> </label>
+        </form> 
+    </body>
+</html>
