@@ -1,67 +1,61 @@
 <?php
 
-var_dump($_POST);
-
 $anketa = [];
 
-
-
 if (isset($_POST['submit'])) {
-    $anketa['name'] = 'Vardas: ' . $_POST['name'];
-    $anketa['surname'] = 'Pavardė: ' . $_POST['surname'];
-    $anketa['age'] = 'Amžius: ' . $_POST['age'] . 'm.';
+    $anketa['vardas'] = 'Vardas: ' . $_POST['vardas'];
+    $anketa['pavarde'] = 'Pavardė: ' . $_POST['pavarde'];
+    $anketa['amzius'] = 'Amžius: ' . $_POST['amzius'];
     $anketa['lygis'] = 'Lygis: ' . $_POST['lygis'];
-    $anketa['text'] = $_POST['name'] . ', kuriam yra ' . $_POST['age'] . ' metai, atsidūrė anketoje ir jis yra ' . lcfirst($_POST['lygis']);
+    $anketa['tekstas'] = $_POST['vardas'] . ', kuriam yra ' . $_POST['amzius'] . ' metai, atsidūrė anketoje ir jis yra ' . lcfirst($_POST['lygis']);
 }
-?>
 
-<!DOCTYPE html>
+?>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Sukurti anketą</title>
-        <style>
-            img {
-                width: 200px;
-            }
-        </style>
+        <title>Forms</title>
+        <link rel="stylesheet" href="../includes/normalize.css">
+        <link rel="stylesheet" href="../includes/style.css">
     </head>
     <body>
-        <h2>Pažymėjimas</h2>
-        <br>
-        <img src="http://www.radicalcompliance.com/wp-content/uploads/2018/06/certifications.jpg" alt="">
-        <br>
-        <form method="post">
-            <label>
-                <span>Vardas:</span> 
-                <input type="text" placeholder="Vardas" name="name" required>
-            </label>
+        <?php if (empty($_POST)): ?>
+            <div class="pildymas">
+                <h1>Užpildyk formą:</h1>
+                <form method="post">
+                    <label>
+                        <span>Vardas:</span>
+                        <input type="text" name="vardas" placeholder="Vardas" required>
+                    </label>
+                    <label>
+                        <span>Pavardė:</span>
+                        <input type="text" name="pavarde" placeholder="Pavardė" required>
+                    </label>
+                    <label>
+                        <span>Amžius:</span>
+                        <input type="number" name="amzius" min="0" max="100" placeholder="Amžius">
+                    </label>
+                    <label for="lygis">
+                        <span>Kaip vertini savo PHP žinias?</span>
+                    </label>
+                    <select name="lygis">
+                        <option value="Pradedantysis" selected>Pradedantysis</option>
+                        <option value="Pažengęs">Pažengęs</option>
+                        <option value="Profesionalas">Profesionalas</option>
+                    </select>
+                    <input type="submit" name="submit" value="Pateikti">
+                </form>
+            </div>
 
-
-            <label>
-                <span>Pavardė:</span> 
-                <input type="text" placeholder="Pavardė" name="surname" required>
-            </label>
-
-            <label>
-                <span>Amžius:</span> 
-                <input type="number" placeholder="23" name="age">
-            </label>
-
-            <label>
-                <span>Kaip vertini savo PHP žinias?</span> 
-                <select id="lygis" name="lygis">
-                    <option value="pradedantysis" selected>Pradedantysis</option>
-                    <option value="pažengęs">Pažengęs</option>
-                    <option value="profesionalas">Profesionalas</option>
-
-                </select>
-
-                <input type="submit" placeholder="Pateikti" name="submit" value="Patvirtinti">
-            </label>
-        </form> 
-        <?php foreach ($anketa as $input): ?> 
-            <p><?php print $input; ?></p>
-        <?php endforeach; ?>
+            <!--Sertifikatas-->
+        <?php else: ?>
+            <div class="anketa-bg">
+                <img src="https://img.pngio.com/free-png-quality-control-certified-stamp-png-images-transparent-certified-stamp-png-850_655.png" width="120 px">
+                <p class="pav">ANKETA</p>
+                <?php foreach ($anketa as $irasas): ?>
+                    <p class="anketa"><?php print $irasas; ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </body>
-</html>
+</html> 
