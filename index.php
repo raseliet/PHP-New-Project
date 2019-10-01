@@ -1,39 +1,37 @@
 <?php
 
-$array = [
-    'value1',
-    [
-        'deep1',
-        [
-            'deep2'
-        ]
-    ],
-    'stringas',
-    'stringas2',
-    [
-        'stringas3',
-        [
-            'stringas4'
-        ]
+$form = [
+    'attr' => [
+        'action' => 'index.php',
+        'method' => 'POST',
+        'class' => 'my-form',
+        'id' => 'login-form'
     ]
 ];
 
-function array_return($array) {
-    $string = '';
+function html_attr($attr) {
+    $html_attr_array = [];
 
-    foreach ($array as $value) {
-        if (substr($string, -1) === '.') {
-            $string = substr_replace($string, ', ', -1);
-        }
+    foreach ($attr as $attribute_key => $atribute_value) {
+        $html_attr_array[] = strtr('@key="@value"',[
+        
+            '@key' => $attribute_key,
+            '@value' => $atribute_value
+        ]);
 
-        if (!is_array($value)) {
-            $string .= "$value.";
-        } else {
-            $string .= array_return($value);
-        }
+        
     }
-    return $string;
+    return implode("", $html_attr_array);
 }
 
-var_dump(array_return($array));
+var_dump(html_attr($form['attr']));
+?>
+
+<html>
+    <body>
+
+<?php require 'templates/form.tpl.php'; ?>
+
+    </body>
+</html>
 
