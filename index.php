@@ -1,11 +1,72 @@
 <?php
-
 $form = [
     'attr' => [
         'action' => 'index.php',
         'method' => 'POST',
         'class' => 'my-form',
         'id' => 'login-form'
+    ],
+    'title' => 'Įveskite duomenis',
+    'fields' => [
+        'first_name' => [
+            'label' => 'Įveskite vardą',
+            'attr' => [
+                'type' => 'text',
+                'value' => '',
+            ],
+            'extra' => [
+                'attr' => [
+                    'class' => 'bg-green',
+                    'placeholder' => 'Rasa'
+                ]
+            ],
+            'error' => 'Klaidingai įvestas vardas',
+        ],
+        'last_name' => [
+            'label' => 'Įveskite pavardę',
+            'attr' => [
+                'type' => 'text',
+                'value' => '',
+            ],
+            'extra' => [
+                'attr' => [
+                    'class' => 'bg-green',
+                    'placeholder' => 'Lietuvnikaite'
+                ]
+            ],
+//            'error' => 'Klaidinga pavardė',
+        ],
+        'age' => [
+            'label' => 'Įveskite amžių',
+            'attr' => [
+                'type' => 'number',
+                'value' => '',
+            ],
+            'extra' => [
+                'attr' => [
+                    'class' => 'bg-blue',
+                    'placeholder' => '33'
+                ],
+            ],
+//            'error' => 'klaidingas vardas',
+        ],
+        'gender' => [
+            'label' => 'Pasirinkite lytį',
+            'options' => [
+                'vyras' => 'Vyras',
+                'moteris' => 'Moteris'
+            ],
+            'attr' => [
+                'type' => 'select'
+            ],
+            'extra' => [
+                'attr' => [
+                    'class' => 'bg-blue',
+                    'placeholder' => ''
+                ],
+            ],
+//            'error' => 'klaida',
+        ],
     ],
     'button' => [
         'submit' => [
@@ -15,28 +76,10 @@ $form = [
         'reset' => [
             'type' => 'reset',
             'value' => 'clear'
-        ]
+        ],
     ],
-    'fields' => [
-        'first_name' => [
-            'type' => 'text',
-            'label' => 'vardas',
-            'placeholder' => 'Rasa'
-        ],
-        'last_name' => [
-            'type' => 'text',
-            'label' => 'pavarde',
-            'placeholder' => 'Lietuvnikaite'
-        ],
-        'age' => [
-            'type' => 'number',
-            'label' => 'age',
-            'placeholder' => 22
-        ]
-    ]
+    'message' => 'Forma užpildyta',
 ];
-
-var_dump($form);
 
 /**
  * Generates HTML attributes
@@ -54,13 +97,12 @@ function html_attr($attr) {
     }
     return implode("", $html_attr_array);
 }
-
 ?>
 
 <html>
     <body>
 
-<?php require 'templates/form.tpl.php'; ?>
+        <?php require 'templates/form.tpl.php'; ?>
 
     </body>
 </html>
