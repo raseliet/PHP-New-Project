@@ -1,6 +1,5 @@
 <?php
-
-var_dump($_POST);
+//var_dump($_POST);
 
 
 $form = [
@@ -88,19 +87,21 @@ function html_attr($attr) {
     return implode(' ', $html_attr_array);
 }
 
-function get_filtered_input($field_indexes) {
+function get_filtered_input($form) {
 
-//    $field_indexes = ['first_name', 'last_name', 'wish'];
     $filter_parameters = [];
-
-    foreach ($field_indexes as $value) {
-        $filter_parameters[$value] = FILTER_SANITIZE_SPECIAL_CHARS;
-    }
-    return filter_input_array(INPUT_POST, $filter_parameters);
+    
+        foreach ($form['fields'] as $key => $value) {
+            $filter_parameters[$key] = FILTER_SANITIZE_SPECIAL_CHARS;
+        }
+        return filter_input_array(INPUT_POST, $filter_parameters);
+        
 }
 
-$filtered_input = get_filtered_input(['first_name', 'last_name', 'wish']);
+$filtered_input = get_filtered_input($form);
 var_dump($filtered_input);
+
+
 ?>
 <html>
     <head>
@@ -109,8 +110,6 @@ var_dump($filtered_input);
         <link rel="stylesheet" href="includes/style.css">
     </head>
     <body>
-        <h1><?php print $_POST['first_name'] ?? ''; ?></h1>
-        <h2><?php print $_POST['wish'] ?? ''; ?></h2>
         <?php require 'templates/form.tpl.php'; ?>
 
 
