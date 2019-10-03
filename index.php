@@ -1,84 +1,73 @@
 <?php
+
+var_dump($_POST);
+
+
 $form = [
     'attr' => [
         'action' => 'index.php',
-        'method' => 'POST',
-        'class' => 'my-form',
-        'id' => 'login-form'
+        'class' => 'bg-black'
     ],
-    'title' => 'Įveskite duomenis',
+    'title' => 'Kalėdų norai',
     'fields' => [
         'first_name' => [
-            'label' => 'Įveskite vardą',
             'attr' => [
-                'type' => 'text',
-                'value' => '',
+                'type' => 'text'
             ],
             'extra' => [
                 'attr' => [
-                    'class' => 'bg-green',
-                    'placeholder' => 'Rasa'
+                    'placeholder' => 'Aurimas',
+                    'class' => 'input-text',
+                    'id' => 'first-name'
                 ]
             ],
-            'error' => 'Klaidingai įvestas vardas',
+            'label' => 'Vardas:',
+            'error' => 'Vardas per trumpas!'
         ],
         'last_name' => [
-            'label' => 'Įveskite pavardę',
             'attr' => [
-                'type' => 'text',
-                'value' => '',
+                'type' => 'text'
             ],
             'extra' => [
                 'attr' => [
-                    'class' => 'bg-green',
-                    'placeholder' => 'Lietuvnikaite'
+                    'placeholder' => 'Stecenka',
+                    'class' => 'input-text',
+                    'id' => 'last-name'
                 ]
             ],
-//            'error' => 'Klaidinga pavardė',
+            'label' => 'Pavardė:',
+            'error' => 'Paliktas tuščias laukas!'
         ],
-        'age' => [
-            'label' => 'Įveskite amžių',
+        'wish' => [
             'attr' => [
-                'type' => 'number',
-                'value' => '',
+                'type' => 'select',
+                'value' => 'tv'
             ],
             'extra' => [
                 'attr' => [
-                    'class' => 'bg-blue',
-                    'placeholder' => '33'
-                ],
+                    'class' => 'input-select',
+                    'id' => 'wish'
+                ]
             ],
-//            'error' => 'klaidingas vardas',
-        ],
-        'gender' => [
-            'label' => 'Pasirinkite lytį',
             'options' => [
-                'vyras' => 'Vyras',
-                'moteris' => 'Moteris'
+                'car' => 'BMW',
+                'tv' => 'Teliko',
+                'socks' => 'Kojinių'
             ],
-            'attr' => [
-                'type' => 'select'
-            ],
-            'extra' => [
-                'attr' => [
-                    'class' => 'bg-blue',
-                    'placeholder' => ''
-                ],
-            ],
-//            'error' => 'klaida',
-        ],
+            'label' => 'Kalėdom noriu:',
+        ]
     ],
-    'button' => [
+    'buttons' => [
         'submit' => [
             'type' => 'submit',
-            'value' => 'send'
+            'value' => 'Siųsti'
         ],
         'reset' => [
             'type' => 'reset',
-            'value' => 'clear'
-        ],
+            'value' => 'Išvalyti'
+        ]
     ],
-    'message' => 'Forma užpildyta',
+    'message' => 'Formos Message!'
 ];
 
 /**
@@ -89,21 +78,41 @@ $form = [
 function html_attr($attr) {
     $html_attr_array = [];
 
-    foreach ($attr as $attribute_key => $atribute_value) {
+    foreach ($attr as $attribute_key => $attribute_value) {
         $html_attr_array[] = strtr('@key="@value"', [
             '@key' => $attribute_key,
-            '@value' => $atribute_value
+            '@value' => $attribute_value
         ]);
     }
-    return implode("", $html_attr_array);
+
+    return implode(' ', $html_attr_array);
 }
+
+function get_filtered_input($field_indexes) {
+
+//    $field_indexes = ['first_name', 'last_name', 'wish'];
+    $filter_parameters = [];
+
+    foreach ($field_indexes as $value) {
+        $filter_parameters[$value] = FILTER_SANITIZE_SPECIAL_CHARS;
+    }
+    return filter_input_array(INPUT_POST, $filter_parameters);
+}
+
+$filtered_input = get_filtered_input(['first_name', 'last_name', 'wish']);
+var_dump($filtered_input);
 ?>
-
 <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Form Templates</title>
+        <link rel="stylesheet" href="includes/style.css">
+    </head>
     <body>
-
+        <h1><?php print $_POST['first_name'] ?? ''; ?></h1>
+        <h2><?php print $_POST['wish'] ?? ''; ?></h2>
         <?php require 'templates/form.tpl.php'; ?>
+
 
     </body>
 </html>
-
