@@ -90,18 +90,24 @@ function html_attr($attr) {
 function get_filtered_input($form) {
 
     $filter_parameters = [];
-    
-        foreach ($form['fields'] as $key => $value) {
-            $filter_parameters[$key] = FILTER_SANITIZE_SPECIAL_CHARS;
-        }
-        return filter_input_array(INPUT_POST, $filter_parameters);
-        
+
+    foreach ($form['fields'] as $key => $value) {
+        $filter_parameters[$key] = FILTER_SANITIZE_SPECIAL_CHARS;
+    }
+    return filter_input_array(INPUT_POST, $filter_parameters);
 }
 
 $filtered_input = get_filtered_input($form);
-var_dump($filtered_input);
+//var_dump($filtered_input);
 
 
+foreach ($form['fields'] as $fields_id => &$field) {
+    $field['attr']['value'] = $filtered_input[$fields_id];
+
+    unset($field);
+//    var_dump($filtered_input);
+//    var_dump($field_id);
+}
 ?>
 <html>
     <head>
@@ -110,7 +116,7 @@ var_dump($filtered_input);
         <link rel="stylesheet" href="includes/style.css">
     </head>
     <body>
-        <?php require 'templates/form.tpl.php'; ?>
+<?php require 'templates/form.tpl.php'; ?>
 
 
     </body>
