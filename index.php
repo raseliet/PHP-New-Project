@@ -1,14 +1,10 @@
 <?php
-
-
-
-
 $form = [
     'attr' => [
         'action' => 'index.php',
         'class' => 'bg-black'
     ],
-    'title' => 'Kalėdų norai',
+    'title' => 'Kaledu norai',
     'fields' => [
         'first_name' => [
             'attr' => [
@@ -22,7 +18,7 @@ $form = [
                 ]
             ],
             'label' => 'Vardas:',
-            'error' => ''
+//            'error' => 'Vardas per trumpas!'
         ],
         'last_name' => [
             'attr' => [
@@ -35,8 +31,8 @@ $form = [
                     'id' => 'last-name'
                 ]
             ],
-            'label' => 'Pavardė:',
-            'error' => ''
+            'label' => 'Pavarde:',
+//            'error' => 'Paliktas tucias laukas!'
         ],
         'wish' => [
             'attr' => [
@@ -52,29 +48,24 @@ $form = [
             'options' => [
                 'car' => 'BMW',
                 'tv' => 'Teliko',
-                'socks' => 'Kojinių'
+                'socks' => 'Kojiniu'
             ],
-            'label' => 'Kalėdom noriu:',
+            'label' => 'Kaledom noriu:',
         ]
     ],
     'buttons' => [
         'submit' => [
             'type' => 'submit',
-            'value' => 'Siųsti'
+            'value' => 'Siusti'
         ],
         'reset' => [
             'type' => 'reset',
-            'value' => 'Išvalyti'
+            'value' => 'Ivalyti'
         ]
     ],
     'message' => 'Formos Message!'
 ];
 
-/**
- * Generates HTML attributes
- * @param array $attr
- * @return string
- */
 function html_attr($attr) {
     $html_attr_array = [];
 
@@ -98,25 +89,30 @@ function get_form_input($form) {
     return filter_input_array(INPUT_POST, $filter_parameters);
 }
 
-
 function validate_not_empty($field_input, &$field) {
-    
-    if ($field_input === ''){
-        $field['error'] = 'Laukas negali būti tuščias!';
+
+    if ($field_input === '') {
+        $field['error'] = 'Laukas negali buti tucias!';
     }
 }
 
-$filtered_input = get_form_input($form);
+function valided_form(&$form) {
+    $filtered_input = get_form_input($form);
 
-foreach ($form['fields'] as $field_id => &$field) {
-    $field_input = $filtered_input[$field_id];
-    $field['attr']['value'] = $field_input;
-    validate_not_empty($field_input, $field);
+    foreach ($form['fields'] as $field_id => &$field) {
+        $field_input = $filtered_input[$field_id];
+        $field['attr']['value'] = $field_input;
 
-    unset($field);
+        validate_not_empty($field_input, $field);
+
+        unset($field);
+    }
 }
 
+valided_form($form);
 
+
+var_dump($form);
 ?>
 <html>
     <head>
@@ -128,4 +124,4 @@ foreach ($form['fields'] as $field_id => &$field) {
 <?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
-
+s
