@@ -1,5 +1,6 @@
 <?php
-//var_dump($_POST);
+
+
 
 
 $form = [
@@ -21,7 +22,7 @@ $form = [
                 ]
             ],
             'label' => 'Vardas:',
-            'error' => 'Vardas per trumpas!'
+            'error' => ''
         ],
         'last_name' => [
             'attr' => [
@@ -35,12 +36,12 @@ $form = [
                 ]
             ],
             'label' => 'Pavardė:',
-            'error' => 'Paliktas tuščias laukas!'
+            'error' => ''
         ],
         'wish' => [
             'attr' => [
                 'type' => 'select',
-                'value' => 'tv'
+                'value' => 'car'
             ],
             'extra' => [
                 'attr' => [
@@ -87,37 +88,44 @@ function html_attr($attr) {
     return implode(' ', $html_attr_array);
 }
 
-function get_filtered_input($form) {
-
+function get_form_input($form) {
     $filter_parameters = [];
 
-    foreach ($form['fields'] as $key => $value) {
-        $filter_parameters[$key] = FILTER_SANITIZE_SPECIAL_CHARS;
+    foreach ($form['fields'] as $field_id => $field) {
+        $filter_parameters[$field_id] = $field['filter'] ?? FILTER_SANITIZE_SPECIAL_CHARS;
     }
+
     return filter_input_array(INPUT_POST, $filter_parameters);
 }
 
-$filtered_input = get_filtered_input($form);
-//var_dump($filtered_input);
 
+function validate_not_empty($field_input, &$field) {
+    
+    if ($field_input === ''){
+        $field['error'] = 'Laukas negali būti tuščias!';
+    }
+}
 
-foreach ($form['fields'] as $fields_id => &$field) {
-    $field['attr']['value'] = $filtered_input[$fields_id];
+$filtered_input = get_form_input($form);
+
+foreach ($form['fields'] as $field_id => &$field) {
+    $field_input = $filtered_input[$field_id];
+    $field['attr']['value'] = $field_input;
+    validate_not_empty($field_input, $field);
 
     unset($field);
-//    var_dump($filtered_input);
-//    var_dump($field_id);
 }
+
+
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Form Templates</title>
+        <title>Form Security</title>
         <link rel="stylesheet" href="includes/style.css">
     </head>
     <body>
 <?php require 'templates/form.tpl.php'; ?>
-
-
     </body>
 </html>
+
