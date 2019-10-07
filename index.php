@@ -4,7 +4,7 @@ $form = [
         'action' => 'index.php',
         'class' => 'bg-black'
     ],
-    'title' => 'Kaledu norai',
+    'title' => 'Kalėdų norai',
     'fields' => [
         'first_name' => [
             'attr' => [
@@ -12,13 +12,15 @@ $form = [
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Aurimas',
+                    'placeholder' => 'Enter Name',
                     'class' => 'input-text',
                     'id' => 'first-name'
                 ]
             ],
-            'label' => 'Vardas:',
-//            'error' => 'Vardas per trumpas!'
+            'validate' => [
+                'validate_not_empty'
+            ],
+            'label' => 'Vardas:'
         ],
         'last_name' => [
             'attr' => [
@@ -26,13 +28,34 @@ $form = [
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Stecenka',
+                    'placeholder' => 'Enter Surname',
                     'class' => 'input-text',
                     'id' => 'last-name'
                 ]
             ],
-            'label' => 'Pavarde:',
-//            'error' => 'Paliktas tucias laukas!'
+            'validate' => [
+                'validate_not_empty'
+            ],
+            'label' => 'Pavardė:'
+        ],
+        'age' => [
+            'attr' => [
+                'type' => 'text'
+            ],
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'Enter Age',
+                    'class' => 'input-text',
+                    'id' => 'last-name'
+                ]
+            ],
+            'validate' => [
+                'validate_not_empty',
+                'validate_is_number',
+                'validate_is_positive',
+                'validate_max_100'
+            ],
+            'label' => 'Metai:'
         ],
         'wish' => [
             'attr' => [
@@ -48,24 +71,29 @@ $form = [
             'options' => [
                 'car' => 'BMW',
                 'tv' => 'Teliko',
-                'socks' => 'Kojiniu'
+                'socks' => 'Kojinių'
             ],
-            'label' => 'Kaledom noriu:',
+            'label' => 'Kalėdom noriu:',
         ]
     ],
     'buttons' => [
         'submit' => [
             'type' => 'submit',
-            'value' => 'Siusti'
+            'value' => 'Siųsti'
         ],
         'reset' => [
             'type' => 'reset',
-            'value' => 'Ivalyti'
+            'value' => 'Išvalyti'
         ]
     ],
     'message' => 'Formos Message!'
 ];
 
+/**
+ * Generates HTML attributes
+ * @param array $attr
+ * @return string
+ */
 function html_attr($attr) {
     $html_attr_array = [];
 
@@ -79,6 +107,38 @@ function html_attr($attr) {
     return implode(' ', $html_attr_array);
 }
 
+function validate_not_empty($field_input, &$field) {
+    if ($field_input === '') {
+        $field['error'] = 'Laukas negali būti tuščias!';
+    } else {
+        return true;
+    }
+}
+
+function validate_is_number($field_input, &$field) {
+    if (!is_numeric($field_input) && !empty($field_input)) {
+        $field['error'] = 'Įveskite skaičių!';
+    } else {
+        return true;
+    }
+}
+
+function validate_max_100($field_input, &$field) {
+    if ($field_input > 100) {
+        $field['error'] = 'Per daug metų!';
+    } else {
+        return true;
+    }
+}
+
+function validate_is_positive($field_input, &$field) {
+    if ($field_input < 0) {
+        $field['error'] = 'Įveskite teigiamą skaičių!';
+    } else {
+        return true;
+    }
+}
+
 function get_form_input($form) {
     $filter_parameters = [];
 
@@ -89,39 +149,26 @@ function get_form_input($form) {
     return filter_input_array(INPUT_POST, $filter_parameters);
 }
 
-function validate_not_empty($field_input, &$field) {
-
-    if ($field_input === '') {
-        $field['error'] = 'Laukas negali buti tucias!';
-    }
-}
-
-function valided_form(&$form) {
+function validate_form(&$form) {
     $filtered_input = get_form_input($form);
-
     foreach ($form['fields'] as $field_id => &$field) {
         $field_input = $filtered_input[$field_id];
         $field['attr']['value'] = $field_input;
-
-        validate_not_empty($field_input, $field);
-
-        unset($field);
+        foreach ($field['validate'] ?? [] as $validator_id => $validator) {
+            $validator($filtered_input[$field_id], $field);
+        }
     }
 }
 
-valided_form($form);
-
-
-var_dump($form);
+validate_form($form);
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Form Security</title>
+        <title>Form Templates</title>
         <link rel="stylesheet" href="includes/style.css">
     </head>
     <body>
 <?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
-s
