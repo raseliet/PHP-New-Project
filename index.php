@@ -1,5 +1,4 @@
 <?php
-
 require 'functions/form/core.php';
 require 'functions/html/generators.php';
 
@@ -61,13 +60,29 @@ $form = [
 
 var_dump($form);
 
-function form_success($filtered_input, $form) {
-//    $suma = $filtered_input['pirmas'] + $filtered_input['antras'];
-    var_dump('You in!');
+function form_fail($filtered_input, &$form) {
+    $form['message'] = 'Fail!';
 }
 
-function form_fail($filtered_input, $form) {
-    var_dump('Retard alert!');
+function form_success($filtered_input, &$form) {
+    $form['message'] = 'success!';
+    var_dump($filtered_input);
+
+    $file = 'data/db.txt';
+    array_to_file($filtered_input, $file);
+}
+
+function array_to_file($array, $file) {
+    $string = json_encode($array);
+
+    $file = file_put_contents($file, $string);
+
+    var_dump($file);
+    if ($file !== false) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 $filtered_input = get_filtered_input($form);
