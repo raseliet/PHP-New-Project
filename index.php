@@ -1,106 +1,61 @@
-
 <?php
+
 $form = [
     'attr' => [
         'action' => 'index.php',
         'class' => 'bg-black'
     ],
-    'title' => 'Kalėdų norai',
+    'title' => 'X + Y',
     'fields' => [
-        'first_name' => [
-            'type' => 'text',
+        'pirmas' => [
+            'type' => 'number',
             'value' => '',
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Enter Name',
+                    'placeholder' => 'Enter number',
                     'class' => 'input-text',
-                    'id' => 'first-name'
+                    'id' => 'pirmas'
                 ]
             ],
             'validators' => [
                 'validate_not_empty'
             ],
-            'label' => 'Vardas:'
+            'label' => 'X:'
         ],
-        'last_name' => [
-            'type' => 'text',
+        'antras' => [
+            'type' => 'number',
             'value' => '',
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Enter Surname',
+                    'placeholder' => 'Enter number',
                     'class' => 'input-text',
-                    'id' => 'last-name'
+                    'id' => 'antras'
                 ]
             ],
             'validators' => [
                 'validate_not_empty'
             ],
-            'label' => 'Pavardė:'
-        ],
-        'age' => [
-            'type' => 'text',
-            'value' => '',
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Enter Age',
-                    'class' => 'input-text',
-                    'id' => 'last-name'
-                ]
-            ],
-            'validators' => [
-                'validate_not_empty',
-                'validate_is_number',
-                'validate_is_positive',
-                'validate_max_100'
-            ],
-            'label' => 'Metai:'
-        ],
-        'wish' => [
-            'type' => 'select',
-            'value' => 'car',
-            'extra' => [
-                'attr' => [
-                    'class' => 'input-select',
-                    'id' => 'wish'
-                ]
-            ],
-            'options' => [
-                'car' => 'BMW',
-                'tv' => 'Teliko',
-                'socks' => 'Kojinių'
-            ],
-            'label' => 'Kalėdom noriu:',
-        ],
-        'email' => [
-            'type' => 'email',
-            'value' => '',
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Enter email',
-                ]
-            ],
-            'validators' => [
-                'validate_not_empty'
-            ],
-            'label' => 'E-mail:'
-        ],
+            'label' => 'Y:'
+        ]
     ],
     'buttons' => [
         'submit' => [
             'type' => 'submit',
-            'value' => 'Siųsti'
+            'value' => 'Suma'
         ],
         'reset' => [
             'type' => 'reset',
             'value' => 'Išvalyti'
         ]
     ],
-    'message' => 'Formos Message!',
+    'message' => '',
     'callbacks' => [
         'success' => 'form_success',
         'fail' => 'form_fail'
     ],
 ];
+
+var_dump($form);
 
 /**
  * Generates HTML attributes
@@ -137,30 +92,29 @@ function validate_is_number($field_input, &$field) {
     return true;
 }
 
-function validate_max_100($field_input, &$field) {
-    if ($field_input > 100) {
-        $field['error'] = 'Per daug metų!';
-        return false;
-    }
-    return true;
-}
-
-function validate_is_positive($field_input, &$field) {
-    if ($field_input < 0) {
-        $field['error'] = 'Įveskite teigiamą skaičių!';
-        return false;
-    }
-    return true;
-}
-
-function validate_is_email($field_input, &$field) {
-    if ($field_input = !preg_match("/^[a-zA-Z ]*$/")) {
-        $field['error'] = 'Įveskite teisingą el.pašto adresą!';
-        return false;
-    }
-    return true;
-}
-
+//function validate_max_100($field_input, &$field) {
+//    if ($field_input > 100) {
+//        $field['error'] = 'Per daug metų!';
+//        return false;
+//    }
+//    return true;
+//}
+//
+//function validate_is_positive($field_input, &$field) {
+//    if ($field_input < 0) {
+//        $field['error'] = 'Įveskite teigiamą skaičių!';
+//        return false;
+//    }
+//    return true;
+//}
+//
+//function validate_is_email($field_input, &$field) {
+//    if ($field_input = !preg_match("/^[a-zA-Z ]*$/")) {
+//        $field['error'] = 'Įveskite teisingą el.pašto adresą!';
+//        return false;
+//    }
+//    return true;
+//}
 //function get_form_input($form) {
 //    $filter_parameters = [];
 //
@@ -214,19 +168,26 @@ function validate_form($filtered_input, &$form) {
     }
 
     if ($success) {
-//        if (isset($form['callbacks']['success'])) {
-//            $form['callbacks']['success']($filtered_input, $form);
-//        }
-        var_dump('success');
+        if (isset($form['callbacks']['success'])) {
+            $form['callbacks']['success']($filtered_input, $form);
+        }
     } else {
-//        if (isset($form['callbacks']['fail'])) {
-//            $form['callbacks']['fail']($filtered_input, $form);
-//        }
-        var_dump('fail');
+        if (isset($form['callbacks']['fail'])) {
+            $form['callbacks']['fail']($filtered_input, $form);
+        }
     }
 
 
     return $success;
+}
+
+function form_success($filtered_input, $form) {
+    $suma = $filtered_input['pirmas'] + $filtered_input['antras'];
+    var_dump("Suma: $suma");
+}
+
+function form_fail($filtered_input, $form) {
+    var_dump('fail:');
 }
 
 $filtered_input = get_filtered_input($form);
