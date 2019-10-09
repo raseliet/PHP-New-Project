@@ -3,7 +3,7 @@
 require 'validators.php';
 
 /**
- * Sanitize all form inputs
+ * Sanitizes all form inputs
  * @param array $form
  * @return array
  */
@@ -12,11 +12,9 @@ function get_filtered_input($form) {
     foreach ($form['fields'] as $field_id => $field) {
         $filter_parameters[$field_id] = $field['filter'] ?? FILTER_SANITIZE_SPECIAL_CHARS;
     }
-    var_dump($filter_parameters);
+
     return filter_input_array(INPUT_POST, $filter_parameters);
 }
-
-//$inputs = get_filtered_input($form);
 
 function validate_form($filtered_input, &$form) {
     $success = true;
@@ -24,9 +22,8 @@ function validate_form($filtered_input, &$form) {
     foreach ($form['fields'] as $field_id => &$field) {
         $field_input = $filtered_input[$field_id];
         $field['value'] = $field_input;
-
         foreach ($field['validators'] ?? [] as $validator) {
-            $is_valid = $validator($filtered_input[$field_id], $field);
+            $is_valid = $validator($field_input, $field);
             if (!$is_valid) {
                 $success = false;
                 break;
@@ -44,7 +41,5 @@ function validate_form($filtered_input, &$form) {
         }
     }
 
-
     return $success;
 }
-

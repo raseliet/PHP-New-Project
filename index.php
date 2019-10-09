@@ -1,4 +1,5 @@
 <?php
+
 require 'functions/form/core.php';
 require 'functions/html/generators.php';
 
@@ -7,66 +8,55 @@ $form = [
         'action' => 'index.php',
         'class' => 'bg-black'
     ],
-    'title' => 'Login form',
+    'title' => 'Kalėdų norai',
     'fields' => [
         'nickname' => [
             'type' => 'text',
-            'value' => '',
+            'label' => 'Nickname:',
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Enter nickname',
+                    'placeholder' => 'Enter Name',
                     'class' => 'input-text',
-                    'id' => 'nickname'
+                    'id' => 'first-name'
                 ]
             ],
             'validators' => [
                 'validate_not_empty'
-            ],
-            'label' => 'Nickname:'
+            ]
         ],
         'password' => [
-            'type' => 'password',
-            'value' => '',
+            'type' => 'text',
+            'label' => 'Password:',
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Enter password',
-                    'class' => 'input-text',
-                    'id' => 'password'
+                    'placeholder' => 'Password'
                 ]
             ],
             'validators' => [
                 'validate_not_empty',
                 'validate_password'
-            ],
-            'label' => 'Password:'
+            ]
         ]
     ],
     'buttons' => [
         'submit' => [
             'type' => 'submit',
-            'value' => 'Submit'
-        ],
-        'reset' => [
-            'type' => 'reset',
-            'value' => 'Clear'
+            'value' => 'Siųsti'
         ]
     ],
-    'message' => '',
+    'message' => 'Užpildyk formą!',
     'callbacks' => [
-        'success' => 'form_success',
-        'fail' => 'form_fail'
-    ],
+        'fail' => 'form_fail',
+        'success' => 'form_success'
+    ]
 ];
 
-var_dump($form);
-
 function form_fail($filtered_input, &$form) {
-    $form['message'] = 'Fail!';
+    $form['message'] = 'Yra klaidų!';
 }
 
 function form_success($filtered_input, &$form) {
     $form['message'] = 'success!';
-    var_dump($filtered_input);
 
     $file = 'data/db.txt';
     array_to_file($filtered_input, $file);
@@ -74,24 +64,31 @@ function form_success($filtered_input, &$form) {
 
 function array_to_file($array, $file) {
     $string = json_encode($array);
-
     $file = file_put_contents($file, $string);
 
-    var_dump($file);
     if ($file !== false) {
         return true;
-    } else {
-        return false;
     }
+
+    return false;
+}
+
+function file_to_array($file) {
+    if (file_exists($file)) {
+        $encoded_array = file_get_contents($file);
+        return json_decode($encoded_array, true);
+    }
+
+    return false;
 }
 
 $filtered_input = get_filtered_input($form);
-
 if (!empty($filtered_input)) {
     validate_form($filtered_input, $form);
 }
+$db = file_to_array('data/db.txt');
+var_dump($db);
 ?>
-
 <html>
     <head>
         <meta charset="UTF-8">
@@ -99,7 +96,6 @@ if (!empty($filtered_input)) {
         <link rel="stylesheet" href="includes/style.css">
     </head>
     <body>
-        <?php require 'templates/form.tpl.php'; ?>
+<?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
-
