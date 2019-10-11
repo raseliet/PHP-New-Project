@@ -1,5 +1,4 @@
 <?php
-
 ////var_dump($_COOKIE);
 //
 //$string = 'verte';
@@ -14,29 +13,33 @@
 //var_dump($_COOKIE);
 
 
-
-$user_id = rand(0, 70);
-$visits = 1;
-
-
-var_dump($_COOKIE);
-
+​
 if (empty($_COOKIE)) {
-    // irasyti counta
-    setcookie('visits', 1, time() + 3600);
-    // irasyti surandominta user_id
-    setcookie('user_id', $user_id, time() + 3600);
+    $id = rand(100000, 999999);
+    $visits = 1;
 } else {
-    setcookie('visits', ++$_COOKIE['visits'], time() + 3600);
-
-    $user_id = $_COOKIE['user_id'];
-    $visits = $_COOKIE['visits'];
-    // padidinti counta vienetu
-    // user_id nuskaityti is cookie
+    $id = $_COOKIE['user_id'];
+    $visits = ++$_COOKIE['visits'];
 }
+​
+setcookie('user_id', $id, strtotime('+30 days'));
+setcookie('visits', $visits, strtotime('+30 days'));
+​
+$h1_text = "User ID: $id";
+$h2_text = "Visits: $visits";
+​
+?>
+
+<html>
+    <head>
+        <title>Cookie Visits Tracking</title>
+    </head>
+    <body>
+        <h1><?php print $h1_text; ?></h1>
+        <h1><?php print $h2_text; ?></h1>            
+    </body>
+</html>
+Collapse
 
 
 
-var_dump("User id: $user_id");
-
-var_dump("Visits: $visits");
