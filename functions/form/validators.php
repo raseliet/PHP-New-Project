@@ -44,3 +44,21 @@ function validate_password($field_input, &$field) {
 
     return true;
 }
+
+/**
+ *
+ * @param array $field_input
+ * @param  $field
+ */
+function validate_team($field_input, &$field) {
+    $teams = file_to_array('./data/teams.txt');
+    if (!empty($teams)) {
+        foreach ($teams as $value) {
+            if ($value['team'] == $field_input) {
+                $field['error'] = 'Tokia komanda jau egzistoja';
+                return false;
+            }
+        }
+    }
+    return true;
+}
