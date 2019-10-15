@@ -51,6 +51,7 @@ function validate_password($field_input, &$field) {
  * @param  $field
  */
 function validate_team($field_input, &$field) {
+    
     $teams = file_to_array('./data/teams.txt');
     if (!empty($teams)) {
         foreach ($teams as $value) {

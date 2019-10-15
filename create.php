@@ -1,5 +1,4 @@
 <?php
-
 require 'functions/form/core.php';
 require 'functions/html/generators.php';
 require 'functions/file.php';
@@ -25,6 +24,7 @@ $form = [
         'submit' => [
             'type' => 'submit',
             'value' => 'Create',
+            'class' => 'button'
         ],
     ],
     'message' => '',
@@ -75,11 +75,13 @@ function form_success($filtered_input, $form) { // vykdoma, jeigu forma uzpildyt
 
     $users_array[] = $filtered_input; // einamuoju indeksu prideda inputus i users_array
     array_to_file($users_array, 'data/teams.txt'); // User_array konvertuoja i .txt faila JSON formatu
+//    header('Location: join.php');
 }
 
 $filtered_input = get_filtered_input($form);
 
 if (!empty($filtered_input)) {
+    var_dump('Buvo submitinta forma');
     $success = validate_form($filtered_input, $form);
 }
 
@@ -98,15 +100,14 @@ var_dump($filtered_input);
             display: flex;
             margin: 50px 0 0 0;
             padding: 20px 0 0;
-            justify-content: center;
+            justify-content: left;
         }
         body {
-            /*background-image: D:/Private/Doc/Desktop/www/img-2.jpg ;*/
+            background-image: url(https://images.bluethumb.com.au/uploads/listing/95077/sarah-crane-the-creatures-are-talking-bluethumb-abd3.jpg?w=800&auto=compress&cs=tinysrgb&q=70&s=37a8cb81325d8acd2affd07313492faa);
             background-size: cover;
         }
         div {
             display: inline-block;
-
 
         }
 
