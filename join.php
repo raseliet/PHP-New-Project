@@ -1,8 +1,8 @@
-<?php
+<?php 
+
 require 'functions/form/core.php';
 require 'functions/html/generators.php';
 require 'functions/file.php';
-
 function get_options() {
     $teams = file_to_array('data/teams.txt');
     if (!empty($teams)) {
@@ -13,9 +13,8 @@ function get_options() {
         return $team_names;
     }
 }
-
+//var_dump($_POST);
 $form = [
-    'title' => 'Join Team',
     'fields' => [
         'player_name' => [
             'type' => 'text',
@@ -26,7 +25,7 @@ $form = [
             ],
             'validators' => [
                 'validate_not_empty',
-                'validate_team'
+                'validate_player'
             ]
         ],
         'team_select' => [
@@ -49,34 +48,42 @@ $form = [
         'success' => 'form_success'
     ]
 ];
-
 function form_success($filtered_input, $form) { // vykdoma, jeigu forma uzpildyta teisingai
     $teams = file_to_array('data/teams.txt'); // users_array - kiekvieno submit metu uzkrauna esama teams.txt reiksme, ir padaro masyvu
+    var_dump($teams);
     foreach ($teams as &$team) {
         if ($team['team'] === $filtered_input['team_select']) {
-            $team['players'][] = $filtered_input['player_name'];
+            $team['players'][] = [
+                'nickname' => $filtered_input['player_name'],
+                'score' => 0
+            ];
         }
-        unset($team);
     }
     array_to_file($teams, 'data/teams.txt');
+    setcookie('cookie_nickname', $filtered_input['player_name'], time() + 3600, '/');
+    setcookie('cookie_team', $filtered_input['team_select'], time() + 3600, '/');
 }
-
 function validate_player($field_input, &$field) {
     $teams = file_to_array('data/teams.txt');
     foreach ($teams as $team) {
+        var_dump($team);
         foreach ($team['players'] as $player) {
-            var_dump($team);
+            if (strtoupper($player['nickname']) == strtoupper($field_input)) {
+                
+                
+                $field['error'] = 'Toks žaidėjas jau egzistuoja';
+                return false;
+            }
         }
     }
-    return $team_names;
+    return true;
 }
-
 $filtered_input = get_filtered_input($form);
 if (!empty($filtered_input)) {
     $success = validate_form($filtered_input, $form);
 }
-
 function form_fail($filtered_input, $form) { //vykdoma ,jeigu forma uzpildyta teisingai
+    
 }
 ?>
 <html>
@@ -91,25 +98,25 @@ function form_fail($filtered_input, $form) { //vykdoma ,jeigu forma uzpildyta te
             body {
                 background-image: url(https://inews.co.uk/images-i.jpimedia.uk/imagefetch/https://inews.co.uk/wp-content/uploads/2019/08/Peppa-Pig.jpg?width=640);
                 background-size: cover;
-                
+
             }
             div {
                 display: inline-block;
-
-           }
-           input {
-               border-radius: 2px;
-           }
-
+            }
+            input {
+                border-radius: 2px;
+            }
         </style>
-
-
         <meta charset="UTF-8">
         <title>Form Templates</title>
+<?php
+if (isset($_COOKIE['players_name']))
+    print "Welcome " . $_COOKIE['players_name'] . "<br />";
+else
+    print"Sorry... Not recognized" . "<br />";
+?>
     </head>
     <body>
-        <?php require 'templates/form.tpl.php'; ?>
+<?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
-
-

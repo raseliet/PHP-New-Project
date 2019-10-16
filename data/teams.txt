@@ -1,1 +1,1 @@
-[{"team":"komanda1","players":[]},{"team":"Rasa","players":[]},{"team":"komanda2","players":[]},{"team":"komanda3","players":[]},{"team":"komanda5","players":[]}]
+[{"team":"komanda3","players":[{"nickname":"Rasa","score":0}]},{"team":"komanda1","players":[]}]
