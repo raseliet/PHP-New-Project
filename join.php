@@ -4,6 +4,10 @@ require 'functions/form/core.php';
 require 'functions/html/generators.php';
 require 'functions/file.php';
 
+session_start();
+var_dump('unset cookie');
+unset($_SESSION['low']);
+
 function get_options() {
     $teams = file_to_array('data/teams.txt');
     if (!empty($teams)) {
@@ -63,8 +67,13 @@ function form_success($filtered_input, $form) { // vykdoma, jeigu forma uzpildyt
         }
     }
     array_to_file($teams, 'data/teams.txt');
-    setcookie('cookie_nickname', $filtered_input['player_name'], time() + 3600, '/');
-    setcookie('cookie_team', $filtered_input['team_select'], time() + 3600, '/');
+
+    $_SESSION['cookie_nickname'] = $filtered_input['player_name'];
+    $_SESSION['cookie_team'] = $filtered_input['team_select'];
+
+//                       indeksas, verte
+//    setcookie('cookie_nickname', $filtered_input['player_name'], time() + 3600, '/');
+//    setcookie('cookie_team', $filtered_input['team_select'], time() + 3600, '/');
 }
 
 function validate_player($field_input, &$field) {
@@ -83,13 +92,22 @@ function validate_player($field_input, &$field) {
 }
 
 $filtered_input = get_filtered_input($form);
+
 if (!empty($filtered_input)) {
     $success = validate_form($filtered_input, $form);
+//    validate_form($filtered_input, $form);
+}
+
+if (isset($_SESSION['cookie_nickname'])) {
+    $text = 'Jau esi prisijungęs kaip ' . $_SESSION['cookie_nickname'];
 }
 
 function form_fail($filtered_input, $form) { //vykdoma ,jeigu forma uzpildyta teisingai
 }
+
+var_dump($_SESSION);
 ?>
+
 <html>
     <head>
         <style>
@@ -113,14 +131,12 @@ function form_fail($filtered_input, $form) { //vykdoma ,jeigu forma uzpildyta te
         </style>
         <meta charset="UTF-8">
         <title>Form Templates</title>
-        <?php
-        if (isset($_COOKIE['players_name']))
-            print "Welcome " . $_COOKIE['players_name'] . "<br />";
-        else
-            print"Sorry... Not recognized" . "<br />";
-        ?>
     </head>
     <body>
-        <?php require 'templates/form.tpl.php'; ?>
+        <?php if (isset($_SESSION['cookie_nickname'])): ?>
+            <h2><?php print $text; ?></h2>
+        <?php else: ?>
+            <?php require 'templates/form.tpl.php'; ?>
+        <?php endif; ?>
     </body>
 </html>

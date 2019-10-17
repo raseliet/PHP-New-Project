@@ -4,12 +4,17 @@ require 'functions/form/core.php';
 require 'functions/html/generators.php';
 require 'functions/file.php';
 
-$text = 'Go for it, ' . $_COOKIE['cookie_nickname'];
+session_start();
 
-if (empty($_COOKIE)) {
+$text = 'Go for it, ' . $_SESSION['cookie_nickname'];
+
+var_dump($_SESSION);
+
+if (empty($_SESSION)) {
     header('Location: join.php');
     exit();
 }
+
 $form = [
     'title' => "$text",
     'fields' => [],
@@ -30,22 +35,22 @@ $form = [
 function validate_kick($filtered_input, &$form) {
     $teams = file_to_array('data/teams.txt');
     foreach ($teams as $team) {
-        if ($team['team'] == $_COOKIE['cookie_team']) {
+        if ($team['team'] == $_SESSION['cookie_team']) {
             foreach ($team['players'] as $player) {
-                if ($player['nickname'] == $_COOKIE['cookie_nickname']) {
+                if ($player['nickname'] == $_SESSION['cookie_nickname']) {
                     return true;
                 }
             }
         }
     }
-}
+};
 
 function form_success($filtered_input, &$form) {
     $teams = file_to_array('data/teams.txt');
     foreach ($teams as &$team) {
-        if ($team['team'] == $_COOKIE['cookie_team']) {
+        if ($team['team'] == $_SESSION['cookie_team']) {
             foreach ($team['players'] as &$player) {
-                if ($player['nickname'] == $_COOKIE['cookie_nickname']) {
+                if ($player['nickname'] == $_SESSION['cookie_nickname']) {
                     $player['score'] ++;
                     var_dump($player);
                 }
@@ -59,6 +64,7 @@ function form_success($filtered_input, &$form) {
 if (get_form_action() == 'kick') {
     validate_form([], $form);
 }
+
 ?>
 <html>
     <head>
