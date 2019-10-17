@@ -7,7 +7,7 @@
         <?php endif; ?>
 
         <!--Start Field Generation-->
-        <?php foreach ($form['fields'] as $field_id => $field): ?>
+        <?php foreach (($form['fields'] ??[])as $field_id => $field): ?>
             <div class="field-container">
 
                 <!--Label-->
@@ -50,7 +50,7 @@
         <?php if (isset($form['buttons'])): ?>
             <?php foreach ($form['buttons'] as $button_id => $button): ?>
                 <div class="button-container">
-                    <input <?php print html_attr(['name' => $button_id] + $button); ?>>
+                    <input <?php print html_attr(['name' => 'action', 'value' => $button_id] + $button); ?>>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
