@@ -69,7 +69,7 @@ function form_fail($filtered_input, &$form) {
 function form_success($filtered_input, $form) { // vykdoma, jeigu forma uzpildyta teisingai
     $users_array = file_to_array('data/teams.txt'); // users_array - kiekvieno submit metu uzkrauna esama teams.txt reiksme, ir padaro masyvu
 
-    var_dump($users_array);
+//    var_dump($users_array);
 
     $filtered_input['players'] = []; //sukuriam players masyva
 
@@ -81,17 +81,17 @@ function form_success($filtered_input, $form) { // vykdoma, jeigu forma uzpildyt
 $filtered_input = get_filtered_input($form);
 
 if (!empty($filtered_input)) {
-    var_dump('Buvo submitinta forma');
+//    var_dump('Buvo submitinta forma');
     $success = validate_form($filtered_input, $form);
 }
 
-var_dump($filtered_input);
+//var_dump($filtered_input);
 ?>
 
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Forma</title>
+        <title>CREATE TEAM</title>
         <link rel="stylesheet" href="includes/style.css">
     </head>
 
@@ -103,7 +103,7 @@ var_dump($filtered_input);
             justify-content: left;
         }
         body {
-            background-image: url(https://images.bluethumb.com.au/uploads/listing/95077/sarah-crane-the-creatures-are-talking-bluethumb-abd3.jpg?w=800&auto=compress&cs=tinysrgb&q=70&s=37a8cb81325d8acd2affd07313492faa);
+            background-image: url(https://media1.giphy.com/media/p1T5dtR0vhtXq/source.gif);
             background-size: cover;
         }
         div {
@@ -114,11 +114,8 @@ var_dump($filtered_input);
     </style>
 
     <body>
-
+      <?php require 'navigation.php'; ?>
         <div class="container">
             <?php require 'templates/form.tpl.php'; ?>
         </div>
-
-    </body>
-</html>
 

@@ -34,7 +34,7 @@ function validate_form($filtered_input, &$form) {
     $success = true;
 
     //Kiekvieno fieldo vlidacija
-    foreach ($form['fields'] ?? [] as $field_id => &$field) {
+    foreach ($form['fields'] as $field_id => &$field) {
         $field_input = $filtered_input[$field_id];
         $field['value'] = $field_input;
         foreach ($field['validators'] ?? [] as $validator) {

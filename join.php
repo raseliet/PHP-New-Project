@@ -5,14 +5,14 @@ require 'functions/html/generators.php';
 require 'functions/file.php';
 
 session_start();
-var_dump('unset cookie');
+//var_dump('unset cookie');
 unset($_SESSION['low']);
 
 function get_options() {
     $teams = file_to_array('data/teams.txt');
     if (!empty($teams)) {
         foreach ($teams as $team) {
-            var_dump($team);
+//            var_dump($team);
             $team_names[$team['team']] = $team['team'];
         }
         return $team_names;
@@ -57,7 +57,7 @@ $form = [
 
 function form_success($filtered_input, $form) { // vykdoma, jeigu forma uzpildyta teisingai
     $teams = file_to_array('data/teams.txt'); // users_array - kiekvieno submit metu uzkrauna esama teams.txt reiksme, ir padaro masyvu
-    var_dump($teams);
+//    var_dump($teams);
     foreach ($teams as &$team) {
         if ($team['team'] === $filtered_input['team_select']) {
             $team['players'][] = [
@@ -79,7 +79,7 @@ function form_success($filtered_input, $form) { // vykdoma, jeigu forma uzpildyt
 function validate_player($field_input, &$field) {
     $teams = file_to_array('data/teams.txt');
     foreach ($teams as $team) {
-        var_dump($team);
+//        var_dump($team);
         foreach ($team['players'] as $player) {
             if (strtoupper($player['nickname']) == strtoupper($field_input)) {
 
@@ -105,7 +105,7 @@ if (isset($_SESSION['cookie_nickname'])) {
 function form_fail($filtered_input, $form) { //vykdoma ,jeigu forma uzpildyta teisingai
 }
 
-var_dump($_SESSION);
+//var_dump($_SESSION);
 ?>
 
 <html>
@@ -118,7 +118,7 @@ var_dump($_SESSION);
                 justify-content: center;
             }
             body {
-                background-image: url(https://inews.co.uk/images-i.jpimedia.uk/imagefetch/https://inews.co.uk/wp-content/uploads/2019/08/Peppa-Pig.jpg?width=640);
+                background-image: url(https://i.gifer.com/S5Lf.gif);
                 background-size: cover;
 
             }
@@ -130,9 +130,11 @@ var_dump($_SESSION);
             }
         </style>
         <meta charset="UTF-8">
-        <title>Form Templates</title>
+        <title>JOIN TEAM</title>
     </head>
+    
     <body>
+         <?php require 'navigation.php'; ?>
         <?php if (isset($_SESSION['cookie_nickname'])): ?>
             <h2><?php print $text; ?></h2>
         <?php else: ?>

@@ -8,7 +8,7 @@ session_start();
 
 $text = 'Go for it, ' . $_SESSION['cookie_nickname'];
 
-var_dump($_SESSION);
+//var_dump($_SESSION);
 
 if (empty($_SESSION)) {
     header('Location: join.php');
@@ -52,7 +52,7 @@ function form_success($filtered_input, &$form) {
             foreach ($team['players'] as &$player) {
                 if ($player['nickname'] == $_SESSION['cookie_nickname']) {
                     $player['score'] ++;
-                    var_dump($player);
+//                    var_dump($player);
                 }
             }
         }
@@ -66,6 +66,7 @@ if (get_form_action() == 'kick') {
 }
 
 ?>
+
 <html>
     <head>
         <style>
@@ -76,7 +77,7 @@ if (get_form_action() == 'kick') {
                 justify-content: center;
             }
             body {
-                background-image: url(https://ksassets.timeincuk.net/wp/uploads/sites/55/2017/03/simpsons-the-great-phatsby-1-920x584.jpg);
+                background-image: url(https://media3.giphy.com/media/Irqe12yuXROuI/giphy.gif);
                 background-size: cover;
 
             }
@@ -88,9 +89,11 @@ if (get_form_action() == 'kick') {
             }
         </style>
         <meta charset="UTF-8">
-        <title>Form Templates</title>
+        <title>PLAY GAME</title>
     </head>
+   
     <body>
+         <?php require 'navigation.php'; ?>
         <?php require 'templates/form.tpl.php'; ?>
     </body>
 </html>
