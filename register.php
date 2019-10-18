@@ -1,29 +1,65 @@
 <?php
+
 require 'functions/form/core.php';
 require 'functions/html/generators.php';
 require 'functions/file.php';
 
 
 $form = [
-    'title' => 'Create Team',
+    'title' => 'Registration form',
     'fields' => [
-        'team' => [
+        'full_name' => [
             'type' => 'text',
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Team name',
-                ]
-            ],
             'validators' => [
                 'validate_not_empty',
-                'validate_team'
+            ],
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'Enter Full Name',
+                ]
+            ],
+        ],
+        'email' => [
+            'type' => 'text',
+            'validators' => [
+                'validate_not_empty',
+                'validate_email',
+                'validate_email_unique',
+            ],
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'Enter email',
+                ]
+            ],
+        ],
+        'password' => [
+            'type' => 'password',
+            'validators' => [
+                'validate_not_empty',
+                'validate_password', // 8 zenklai
+            ],
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'password',
+                ]
             ]
-        ]
+        ],
+        'password_repeat' => [
+            'type' => 'password',
+            'validators' => [
+                'validate_not_empty',
+            ],
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'repeat password',
+                ]
+            ],
+        ],
     ],
     'buttons' => [
         'submit' => [
             'type' => 'submit',
-            'value' => 'Create',
+            'value' => 'Register',
             'class' => 'button'
         ],
     ],
@@ -34,41 +70,12 @@ $form = [
     ]
 ];
 
-//$teams = [
-//    [
-//        'team_name' => 'lochai',
-//        'players' => [
-//            [
-//                'nickname' => 'killer',
-//                'score' => 10
-//            ],
-//            [
-//                'nickname' => 'thriller',
-//                'score' => 10
-//            ]
-//        ]
-//    ],
-//    [
-//        'team_name' => 'nelochai',
-//        'players' => [
-//            [
-//                'nickname' => 'winner',
-//                'score' => 10
-//            ],
-//            [
-//                'nickname' => 'newinner',
-//                'score' => 10
-//            ]
-//        ]
-//    ],
-//];
 function form_fail($filtered_input, &$form) {
     $form['message'] = 'Fail!';
 }
 
 function form_success($filtered_input, $form) { // vykdoma, jeigu forma uzpildyta teisingai
     $users_array = file_to_array('data/teams.txt'); // users_array - kiekvieno submit metu uzkrauna esama teams.txt reiksme, ir padaro masyvu
-
 //    var_dump($users_array);
 
     $filtered_input['players'] = []; //sukuriam players masyva
@@ -114,7 +121,7 @@ if (!empty($filtered_input)) {
     </style>
 
     <body>
-      <?php require 'navigation.php'; ?>
+        <?php require 'navigation.php'; ?>
         <div class="container">
             <?php require 'templates/form.tpl.php'; ?>
         </div>
