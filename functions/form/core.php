@@ -45,16 +45,21 @@ function validate_form($filtered_input, &$form) {
             }
         }
     }
-
+    
     if ($success) {
-       foreach ($form['validators'] ?? [] as $validator_id => $validator) {
-           $is_valid = $validator_id($filtered_input, $form, $validator);
-           if (!$is_valid) {
-               $success = false;
-               break;
-           }
-       }
-   }
+        foreach ($form['validators'] ?? [] as $validator_id => $validator) {
+            if (is_array($validator)) {
+                $is_valid = $validator_id($filtered_input, $form, $validator);
+            } else {
+                $is_valid = $validator($filtered_input, $form);
+            }
+            
+            if (!$is_valid) {
+                $success = false;
+                break;
+            }
+        }
+    }
 
 //    // Visos formos validacija 
 //    foreach ($form['validators'] ?? [] as $validator) {

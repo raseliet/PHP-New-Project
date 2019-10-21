@@ -23,7 +23,7 @@ $form = [
             'validators' => [
                 'validate_not_empty',
 //             'validate_email',
-             'validate_email_unique',
+                'validate_email_unique',
             ],
             'extra' => [
                 'attr' => [
@@ -84,6 +84,7 @@ function form_success($filtered_input, $form) { // vykdoma, jeigu forma uzpildyt
     var_dump($users_array);
 
     $filtered_input['users'] = []; //sukuriam players masyva
+    var_dump($filtered_input);
 
     $users_array[] = $filtered_input; // einamuoju indeksu prideda inputus i users_array
     array_to_file($users_array, 'data/users.txt'); // User_array konvertuoja i .txt faila JSON formatu
@@ -95,7 +96,7 @@ $filtered_input = get_filtered_input($form);
 
 
 if (!empty($filtered_input)) {
-var_dump('Buvo submitinta forma');
+    var_dump('Buvo submitinta forma');
     $success = validate_form($filtered_input, $form);
 }
 
@@ -103,7 +104,6 @@ var_dump('Buvo submitinta forma');
 //
 //$params = ['password', 'password_repeat'];
 //var_dump($params);
-
 //function validate_fields_match($filtered_input, $form, $params){
 //       if(preg_match("$user_password_repeat === $user_password", $user_password_repeat))
 //    if ()
@@ -115,7 +115,6 @@ var_dump('Buvo submitinta forma');
 //            }
 //
 //
-
 ?>
 
 <html>

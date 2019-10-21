@@ -96,3 +96,4 @@ function validate_email_unique($field_input, &$field) {
     }
     return true;
 }
+
