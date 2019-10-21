@@ -46,15 +46,24 @@ function validate_form($filtered_input, &$form) {
         }
     }
 
+    if ($success) {
+       foreach ($form['validators'] ?? [] as $validator_id => $validator) {
+           $is_valid = $validator_id($filtered_input, $form, $validator);
+           if (!$is_valid) {
+               $success = false;
+               break;
+           }
+       }
+   }
 
-    // Visos formos validacija 
-    foreach ($form['validators'] ?? [] as $validator) {
-        $is_valid = $validator($filtered_input, $form);
-        if (!$is_valid) {
-            $success = false;
-            break;
-        }
-    }
+//    // Visos formos validacija 
+//    foreach ($form['validators'] ?? [] as $validator) {
+//        $is_valid = $validator($filtered_input, $form);
+//        if (!$is_valid) {
+//            $success = false;
+//            break;
+//        }
+//    }
 
     if ($success) {
         if (isset($form['callbacks']['success'])) {

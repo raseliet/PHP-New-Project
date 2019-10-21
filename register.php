@@ -1,5 +1,4 @@
 <?php
-
 require 'functions/form/core.php';
 require 'functions/html/generators.php';
 require 'functions/file.php';
@@ -15,7 +14,7 @@ $form = [
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Enter Full Name',
+                    'placeholder' => 'enter full name',
                 ]
             ],
         ],
@@ -23,12 +22,12 @@ $form = [
             'type' => 'text',
             'validators' => [
                 'validate_not_empty',
-                'validate_email',
-                'validate_email_unique',
+//                'validate_email',
+//                'validate_email_unique',
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Enter email',
+                    'placeholder' => 'enter email',
                 ]
             ],
         ],
@@ -40,15 +39,15 @@ $form = [
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'password',
+                    'placeholder' => 'enter password',
                 ]
             ]
         ],
         'password_repeat' => [
             'type' => 'password',
-            'validators' => [
-                'validate_not_empty',
-            ],
+//            'validators' => [
+//                'validate_not_empty',
+//            ],
             'extra' => [
                 'attr' => [
                     'placeholder' => 'repeat password',
@@ -63,6 +62,12 @@ $form = [
             'class' => 'button'
         ],
     ],
+    'validators' => [
+        'validate_fields_match' => [
+            'password',
+            'password_repeat',
+        ],
+    ],
     'message' => '',
     'callbacks' => [
         'success' => 'form_success',
@@ -75,31 +80,49 @@ function form_fail($filtered_input, &$form) {
 }
 
 function form_success($filtered_input, $form) { // vykdoma, jeigu forma uzpildyta teisingai
-    $users_array = file_to_array('data/teams.txt'); // users_array - kiekvieno submit metu uzkrauna esama teams.txt reiksme, ir padaro masyvu
-//    var_dump($users_array);
+    $users_array = file_to_array('data/users.txt'); // users_array - kiekvieno submit metu uzkrauna esama teams.txt reiksme, ir padaro masyvu
+    var_dump($users_array);
 
-    $filtered_input['players'] = []; //sukuriam players masyva
+    $filtered_input['users'] = []; //sukuriam players masyva
 
     $users_array[] = $filtered_input; // einamuoju indeksu prideda inputus i users_array
-    array_to_file($users_array, 'data/teams.txt'); // User_array konvertuoja i .txt faila JSON formatu
+    array_to_file($users_array, 'data/users.txt'); // User_array konvertuoja i .txt faila JSON formatu
 //    header('Location: join.php');
 }
 
 $filtered_input = get_filtered_input($form);
 
+
+
 if (!empty($filtered_input)) {
-//    var_dump('Buvo submitinta forma');
+var_dump('Buvo submitinta forma');
     $success = validate_form($filtered_input, $form);
 }
 
 //var_dump($filtered_input);
+//
+//$params = ['password', 'password_repeat'];
+//var_dump($params);
+
+//function validate_fields_match($filtered_input, $form, $params){
+//       if(preg_match("$user_password_repeat === $user_password", $user_password_repeat))
+//    if ()
+//                        {
+//                      return true;
+//                   }else{
+//                       return false;
+//                 }
+//            }
+//
+//
+
 ?>
 
 <html>
     <head>
         <meta charset="UTF-8">
         <title>CREATE TEAM</title>
-        <link rel="stylesheet" href="includes/style.css">
+
     </head>
 
     <style>
@@ -121,8 +144,8 @@ if (!empty($filtered_input)) {
     </style>
 
     <body>
-        <?php require 'navigation.php'; ?>
+<?php require 'navigation.php'; ?>
         <div class="container">
-            <?php require 'templates/form.tpl.php'; ?>
+        <?php require 'templates/form.tpl.php'; ?>
         </div>
 

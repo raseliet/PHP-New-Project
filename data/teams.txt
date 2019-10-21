@@ -1,1 +1,0 @@
-[{"team":"komanda1","players":[{"nickname":"Rasa","score":42},{"nickname":"Iveta","score":37},{"nickname":"Laimutis","score":5}]},{"team":"komanda2","players":[]},{"team":"komanda10","players":[]}]
