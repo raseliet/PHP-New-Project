@@ -74,3 +74,25 @@ function validate_fields_match($filtered_input, &$form, $params) {
     }
     return true;
 }
+
+function validate_email_unique($field_input, &$field) {
+
+    var_dump('vykdomas kodas');
+    $users = file_to_array('./data/users.txt');
+
+    var_dump('Ieita i file to array');
+    if (!empty($users)) {
+        $unique_email = $field_input;
+
+        foreach ($users as $user) {
+            var_dump($unique_email);
+            if ($user['email'] == $unique_email) {
+                var_dump('toks emailas egzistuoja');
+                $field['error'] = 'Toks useris jau egzistoja';
+
+                return false;
+            }
+        }
+    }
+    return true;
+}

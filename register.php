@@ -22,8 +22,8 @@ $form = [
             'type' => 'text',
             'validators' => [
                 'validate_not_empty',
-//                'validate_email',
-//                'validate_email_unique',
+//             'validate_email',
+             'validate_email_unique',
             ],
             'extra' => [
                 'attr' => [
