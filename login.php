@@ -87,26 +87,16 @@ function form_fail($filtered_input, &$form) {
 
 function form_success($filtered_input, $form) { // vykdoma, jeigu forma uzpildyta teisingai
     var_dump('pavyko');
+    
+    $_SESSION['email'] = $filtered_input['email'];
+//    $form['message'] = 'Sveiki, sugrize';
+    
+    header("Location: index.php");
 }
-//
-//$user_already_joined = !empty($_SESSION);
-//
-//if ($user_already_joined) {
-//    $display_form = true;
-//
-//        if ($form_success) {
-//            $display_text = 'Opa, Yra! Spyris užskaitytas!';
-//        } else {
-//            $display_text = 'Smugis neįskaitytas!';
-//        }
-//} else {
-//    
-//    $display_text = 'Sorry, seni.. Nepriklausai jokiai komandai! Join first!';
-//    $display_form = false;
-//}
 
 
 ?>
+
 <html>
     <head>
         <meta charset="UTF-8">
