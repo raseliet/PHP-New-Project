@@ -132,7 +132,7 @@ if (!empty($filtered_input)) {
             justify-content: left;
         }
         body {
-            background-image: url(https://media1.giphy.com/media/p1T5dtR0vhtXq/source.gif);
+            background-image: url(http://giphygifs.s3.amazonaws.com/media/LiWsL77P4tA9a/giphy.gif);
             background-size: cover;
         }
         div {

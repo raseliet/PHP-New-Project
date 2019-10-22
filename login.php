@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 require 'functions/form/core.php';
 require 'functions/html/generators.php';
 require 'functions/file.php';
@@ -85,6 +88,23 @@ function form_fail($filtered_input, &$form) {
 function form_success($filtered_input, $form) { // vykdoma, jeigu forma uzpildyta teisingai
     var_dump('pavyko');
 }
+//
+//$user_already_joined = !empty($_SESSION);
+//
+//if ($user_already_joined) {
+//    $display_form = true;
+//
+//        if ($form_success) {
+//            $display_text = 'Opa, Yra! Spyris užskaitytas!';
+//        } else {
+//            $display_text = 'Smugis neįskaitytas!';
+//        }
+//} else {
+//    
+//    $display_text = 'Sorry, seni.. Nepriklausai jokiai komandai! Join first!';
+//    $display_form = false;
+//}
+
 
 ?>
 <html>
