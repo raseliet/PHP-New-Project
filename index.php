@@ -1,10 +1,24 @@
-<?php 
+<?php
 
 session_start();
 
-require 'functions/form/core.php';
-require 'functions/html/generators.php';
+
 require 'functions/file.php';
+
+if (!empty($_SESSION)) {
+    //prisijunges
+
+    $users = file_to_array('data/users.txt');
+    foreach ($users as $user) {
+        if ($user['email'] = $_SESSION['email']) {
+            $full_name = $user['full_name'];
+        }
+    }
+
+    $h1_text = "Sveikas atvykes, $full_name";
+} else {
+    $h1_text = 'Jus esate neprisijunges';
+}
 
 ?>
 
@@ -34,12 +48,12 @@ require 'functions/file.php';
     </style>
 
     <body>
-            <?php require 'navigation.php'; ?>
+        <?php require 'navigation.php'; ?>
         <div class="container">
-           
+
         </div>
-        <h1></h1>
-        <h1></h1>
+        <h1><?php print $h1_text; ?></h1>
+
 
     </body>
 </html>
